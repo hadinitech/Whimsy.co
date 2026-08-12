@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop - whimsy.co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#F7B6D2;
+    --buttercream:#FFF1B8;
+    --lavender:#C9B8F4;
+    --blue:#B9DDF5;
+    --mint:#BFE8D0;
+    --peach:#FFD0B5;
+    --cream:#FFF9EE;
+    --charcoal:#292631;
+    --grape:#7654D6;
+
+    --display:'Baloo 2', system-ui, sans-serif;
+    --body:'Plus Jakarta Sans', system-ui, sans-serif;
+    --mono:'Space Mono', monospace;
+
+    --radius-lg:28px;
+    --radius-md:18px;
+    --radius-sm:10px;
+    --container: 1180px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:var(--body);
+    background:var(--cream);
+    color:var(--charcoal);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+  ul{ list-style:none; }
+
+  .wrap{ max-width:var(--container); margin:0 auto; padding:0 28px; }
+
+  h1,h2,h3{ font-family:var(--display); line-height:1.02; letter-spacing:-0.01em; }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase;
+    background:var(--cream); color:var(--charcoal);
+    border:1.5px dashed var(--charcoal);
+    padding:6px 14px; border-radius:999px;
+    transform:rotate(-2deg);
+  }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--display); font-weight:700; font-size:16px;
+    padding:14px 26px; border-radius:999px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn-primary{ background:var(--charcoal); color:var(--cream); box-shadow:4px 4px 0 rgba(41,38,49,0.25); }
+  .btn-primary:hover{ transform:translate(-2px,-2px); box-shadow:6px 6px 0 rgba(41,38,49,0.3); }
+  .btn-primary:active{ transform:translate(0,0); box-shadow:2px 2px 0 rgba(41,38,49,0.3); }
+  .btn-ghost{ font-family:var(--display); font-weight:700; font-size:16px; border-bottom:2.5px solid var(--charcoal); padding-bottom:2px; }
+  .btn-ghost:hover{ color:var(--grape); border-color:var(--grape); }
+
+  .sticker{
+    position:relative;
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:var(--mono); font-weight:700; font-size:12px; letter-spacing:.04em; text-transform:uppercase;
+    background:var(--cream);
+    border:1.5px solid var(--charcoal);
+    border-radius:999px;
+    padding:7px 14px 7px 10px;
+    box-shadow:3px 3px 0 var(--charcoal);
+  }
+  .sticker::before{ content:"✦"; font-size:11px; }
+  .sticker.-grape{ background:var(--grape); color:var(--cream); border-color:var(--charcoal); }
+
+  .doodle{ position:absolute; pointer-events:none; opacity:.9; }
+  .float{ animation:float 5s ease-in-out infinite; }
+  .float.-slow{ animation-duration:7s; }
+  .float.-rev{ animation-direction:reverse; }
+  @keyframes float{ 0%,100%{ transform:translateY(0) rotate(var(--r,0deg)); } 50%{ transform:translateY(-14px) rotate(var(--r,0deg)); } }
+
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+  /* ---------- announcement ---------- */
+  .announce{ background:var(--charcoal); color:var(--cream); overflow:hidden; white-space:nowrap; padding:9px 0; }
+  .announce-track{ display:inline-flex; gap:40px; font-family:var(--mono); font-size:12.5px; letter-spacing:.05em; animation:marquee 22s linear infinite; }
+  @keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+  /* ---------- nav ---------- */
+  header.site{ position:sticky; top:0; z-index:50; background:var(--cream); border-bottom:1.5px solid var(--charcoal); }
+  nav.main{ display:flex; align-items:center; justify-content:space-between; padding:16px 28px; max-width:var(--container); margin:0 auto; }
+  .logo{ font-family:var(--display); font-weight:800; font-size:22px; letter-spacing:-0.02em; }
+  .logo span{ color:var(--grape); }
+  .nav-links{ display:flex; gap:30px; font-family:var(--display); font-weight:600; font-size:15px; }
+  .nav-links a{ position:relative; padding-bottom:3px; }
+  .nav-links a:hover{ color:var(--grape); }
+  .nav-links a.active{ border-bottom:2.5px solid var(--pink); }
+  .nav-icons{ display:flex; align-items:center; gap:18px; }
+  .nav-icons button{ display:flex; position:relative; }
+  .nav-icons svg{ width:20px; height:20px; }
+  .cart-count{ position:absolute; top:-7px; right:-8px; background:var(--grape); color:var(--cream); font-family:var(--mono); font-size:10px; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .hamburger{ display:none; flex-direction:column; gap:5px; }
+  .hamburger span{ width:22px; height:2.5px; background:var(--charcoal); border-radius:2px; }
+  .mobile-menu{ display:none; flex-direction:column; gap:2px; background:var(--cream); border-top:1.5px solid var(--charcoal); padding:10px 28px 20px; }
+  .mobile-menu.open{ display:flex; }
+  .mobile-menu a{ font-family:var(--display); font-weight:600; font-size:17px; padding:10px 0; border-bottom:1px dashed rgba(41,38,49,.2); }
+
+  /* ---------- shop hero ---------- */
+  .shop-hero{ background:var(--cream); padding:56px 0 34px; position:relative; overflow:hidden; }
+  .shop-hero .wrap{ position:relative; z-index:2; }
+  .shop-hero h1{ font-size:clamp(40px,6vw,68px); margin:16px 0 12px; }
+  .shop-hero p{ font-size:17px; max-width:460px; color:#4a4552; }
+  .shop-hero-doodle{ position:absolute; opacity:.85; }
+
+  /* ---------- category tabs ---------- */
+  .cat-tabs-section{ background:var(--cream); border-bottom:1.5px solid var(--charcoal); position:sticky; top:66px; z-index:40; }
+  .cat-tabs{ display:flex; gap:10px; padding:16px 28px; max-width:var(--container); margin:0 auto; overflow-x:auto; scrollbar-width:none; }
+  .cat-tabs::-webkit-scrollbar{ display:none; }
+  .cat-tab{
+    font-family:var(--display); font-weight:700; font-size:14.5px;
+    padding:10px 20px; border-radius:999px; border:1.5px solid var(--charcoal);
+    white-space:nowrap; background:var(--cream); transition:background .15s ease, transform .15s ease;
+  }
+  .cat-tab:hover{ transform:translateY(-2px); }
+  .cat-tab.active{ background:var(--pink); }
+
+  /* ---------- filter/sort bar ---------- */
+  .filter-bar{ background:var(--cream); padding:18px 0; }
+  .filter-bar .wrap{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .fb-left, .fb-right{ display:flex; align-items:center; gap:12px; position:relative; }
+  .fb-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--mono); font-size:13px; letter-spacing:.03em; text-transform:uppercase;
+    border:1.5px solid var(--charcoal); border-radius:999px; padding:9px 16px;
+    background:var(--cream);
+  }
+  .fb-btn:hover{ background:var(--buttercream); }
+  .fb-btn svg{ width:13px; height:13px; }
+  .fb-count{ background:var(--grape); color:var(--cream); border-radius:50%; width:16px; height:16px; font-size:10px; display:flex; align-items:center; justify-content:center; }
+  .result-count{ font-family:var(--mono); font-size:12.5px; color:#6b6577; }
+
+  .dropdown-panel{
+    display:none; position:absolute; top:calc(100% + 10px); left:0; z-index:30;
+    background:var(--cream); border:1.5px solid var(--charcoal); border-radius:var(--radius-md);
+    box-shadow:5px 5px 0 rgba(41,38,49,.18); padding:20px; min-width:260px;
+  }
+  .dropdown-panel.open{ display:block; }
+  .fb-right .dropdown-panel{ left:auto; right:0; }
+  .panel-group{ margin-bottom:16px; }
+  .panel-group:last-child{ margin-bottom:0; }
+  .panel-group h5{ font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px; opacity:.65; }
+  .panel-option{ display:flex; align-items:center; gap:9px; padding:6px 0; font-size:14.5px; cursor:pointer; }
+  .panel-option input{ accent-color:var(--grape); width:15px; height:15px; }
+  .sort-option{ display:block; width:100%; text-align:left; padding:9px 6px; border-radius:8px; font-size:14.5px; }
+  .sort-option:hover{ background:var(--buttercream); }
+  .sort-option.active{ background:var(--pink); font-weight:700; }
+  .panel-clear{ margin-top:14px; font-family:var(--mono); font-size:12px; text-decoration:underline; opacity:.7; }
+  .panel-clear:hover{ opacity:1; }
+
+  /* ---------- product grid ---------- */
+  .shop-grid-section{ background:var(--cream); padding:34px 0 20px; }
+  .product-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  .product-card{
+    border:1.5px solid var(--charcoal); border-radius:var(--radius-md);
+    overflow:hidden; transition:transform .2s ease, box-shadow .2s ease;
+    display:flex; flex-direction:column;
+  }
+  .product-card:hover{ transform:translateY(-4px); box-shadow:5px 5px 0 rgba(41,38,49,.18); }
+  .product-thumb{ position:relative; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .product-thumb svg{ width:58%; height:58%; transition:opacity .25s ease; }
+  .thumb-alt{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0; }
+  .product-card:hover .thumb-main{ opacity:0; }
+  .product-card:hover .thumb-alt{ opacity:1; }
+  .badge{
+    position:absolute; top:10px; left:10px; z-index:2;
+    font-family:var(--mono); font-weight:700; font-size:10.5px; letter-spacing:.03em; text-transform:uppercase;
+    background:var(--charcoal); color:var(--cream); padding:5px 10px; border-radius:999px;
+  }
+  .badge.-new{ background:var(--grape); }
+  .badge.-limited{ background:var(--charcoal); }
+  .badge.-popular{ background:var(--pink); color:var(--charcoal); }
+  .badge.-back{ background:var(--mint); color:var(--charcoal); }
+  .badge.-last{ background:var(--peach); color:var(--charcoal); }
+  .badge.-unhinged{ background:var(--lavender); color:var(--charcoal); }
+  .quick-add{
+    position:absolute; left:10px; right:10px; bottom:10px; z-index:2;
+    background:var(--charcoal); color:var(--cream); border-radius:999px;
+    text-align:center; padding:10px; font-family:var(--display); font-weight:700; font-size:13px;
+    transform:translateY(14px); opacity:0; transition:all .2s ease;
+  }
+  .product-card:hover .quick-add{ transform:translateY(0); opacity:1; }
+  .quick-add.added{ background:var(--mint); color:var(--charcoal); }
+  .product-info{ padding:14px 14px 16px; }
+  .product-info .pname{ font-family:var(--display); font-weight:700; font-size:15px; margin-bottom:4px; }
+  .product-info .prow{ display:flex; align-items:center; justify-content:space-between; }
+  .product-info .price{ font-weight:700; font-family:var(--mono); font-size:13.5px; }
+  .stars{ font-size:11.5px; color:var(--grape); letter-spacing:1px; }
+
+  /* ---------- empty state ---------- */
+  .empty-state{ display:none; text-align:center; padding:80px 20px; }
+  .empty-state.show{ display:block; }
+  .empty-state .edoodle{ width:90px; margin:0 auto 22px; }
+  .empty-state h3{ font-size:clamp(26px,4vw,38px); margin-bottom:12px; }
+  .empty-state p{ font-family:var(--mono); font-size:14px; color:#6b6577; margin-bottom:26px; }
+
+  /* ---------- mid banner ---------- */
+  .mid-banner{ background:var(--buttercream); padding:80px 0; margin:40px 0; text-align:center; position:relative; overflow:hidden; }
+  .mid-banner .wrap{ position:relative; z-index:2; }
+  .mid-banner h2{ font-size:clamp(32px,6vw,58px); margin-bottom:8px; }
+  .mid-banner p{ font-family:var(--body); font-size:17px; margin-bottom:24px; color:#3a3542; }
+  .mid-doodle{ position:absolute; opacity:.5; }
+
+  /* ---------- mood section ---------- */
+  .mood-section{ background:var(--lavender); padding:70px 0; }
+  .mood-head{ text-align:center; max-width:600px; margin:0 auto 34px; }
+  .mood-head h2{ font-size:clamp(28px,4vw,42px); margin-bottom:10px; }
+  .mood-head p{ font-family:var(--mono); font-size:14px; }
+  .mood-grid{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  .mood-chip{
+    font-family:var(--display); font-weight:700; font-size:16px;
+    padding:14px 26px; border-radius:999px; border:1.5px solid var(--charcoal);
+    background:var(--cream); transition:transform .15s ease, background .15s ease;
+  }
+  .mood-chip:hover{ transform:translateY(-3px) rotate(-1deg); }
+  .mood-chip.active{ background:var(--pink); }
+
+  /* ---------- bottom cta ---------- */
+  .bottom-cta{ background:var(--pink); padding:90px 0; text-align:center; }
+  .bottom-cta h2{ font-size:clamp(30px,5vw,52px); margin-bottom:12px; }
+  .bottom-cta p{ font-size:17px; max-width:460px; margin:0 auto 30px; color:#3a3542; }
+  .bottom-cta-ctas{ display:flex; gap:18px; justify-content:center; flex-wrap:wrap; }
+
+  /* ---------- footer ---------- */
+  footer.site{ background:var(--charcoal); color:var(--cream); padding:70px 0 30px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:30px; padding-bottom:50px; border-bottom:1px solid rgba(255,249,238,.15); margin-bottom:26px; }
+  .footer-brand .logo{ color:var(--cream); }
+  .footer-brand .logo span{ color:var(--pink); }
+  .footer-brand p{ margin-top:12px; font-family:var(--display); font-weight:600; color:var(--pink); }
+  .footer-col h4{ font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--peach); margin-bottom:14px; }
+  .footer-col a{ display:block; font-size:14.5px; padding:6px 0; opacity:.85; }
+  .footer-col a:hover{ opacity:1; color:var(--pink); }
+  .footer-bottom{ display:flex; justify-content:space-between; font-family:var(--mono); font-size:12px; opacity:.6; flex-wrap:wrap; gap:10px; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:960px){
+    .nav-links{ display:none; }
+    .hamburger{ display:flex; }
+    .product-grid{ grid-template-columns:repeat(3,1fr); }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+    .footer-brand{ grid-column:1/-1; }
+    .cat-tabs-section{ top:60px; }
+  }
+  @media (max-width:640px){
+    .product-grid{ grid-template-columns:1fr 1fr; gap:14px; }
+    .filter-bar .wrap{ flex-direction:row; justify-content:space-between; }
+    .fb-left, .fb-right{ flex:1; }
+    .fb-btn{ width:100%; justify-content:center; }
+    .result-count{ display:none; }
+    .footer-grid{ grid-template-columns:1fr; }
+    .dropdown-panel{ left:0; right:0; min-width:0; }
+    .fb-right .dropdown-panel{ left:0; right:0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+    html{ scroll-behavior:auto; }
+  }
+
+  :focus-visible{ outline:3px solid var(--grape); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<div class="announce">
+  <div class="announce-track">
+    <span>✦ FREE SHIPPING ON ORDERS OVER R600 ✦ NEW PINS EVERY FRIDAY ✦ RETURNS ARE PAINLESS, WE PROMISE ✦</span>
+    <span>✦ FREE SHIPPING ON ORDERS OVER R600 ✦ NEW PINS EVERY FRIDAY ✦ RETURNS ARE PAINLESS, WE PROMISE ✦</span>
+  </div>
+</div>
+
+<header class="site">
+  <nav class="main">
+    <a href="index.html" class="logo">whimsy<span>.</span>co</a>
+    <ul class="nav-links">
+      <li><a href="shop.html" class="active">Shop</a></li>
+      <li><a href="index.html#story">About</a></li>
+    </ul>
+    <div class="nav-icons">
+      <button aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
+      <button aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg></button>
+      <button aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.5-9.3-8.8C1.1 8 2.4 4.8 5.6 4.1 8 3.6 10 5 12 7c2-2 4-3.4 6.4-2.9 3.2.7 4.5 3.9 2.9 7.1C19 15.5 12 20 12 20z"/></svg></button>
+      <button aria-label="Cart" id="cartBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg><span class="cart-count" id="cartCount">0</span></button>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="shop.html">Shop</a>
+    <a href="shop.html?category=totes">Totes</a>
+    <a href="shop.html?category=pins">Pins</a>
+    <a href="shop.html?collection=new">New Drops</a>
+    <a href="index.html#story">About</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- SHOP HERO -->
+  <section class="shop-hero">
+    <svg class="shop-hero-doodle" style="top:16px; right:6%; width:54px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#292631" stroke-width="3" stroke-dasharray="6 7"/></svg>
+    <svg class="shop-hero-doodle" style="bottom:6px; left:2%; width:44px;" viewBox="0 0 100 100"><path d="M50 10l6 14 15 2-11 10 3 15-13-8-13 8 3-15-11-10 15-2z" fill="#F7B6D2" stroke="#292631" stroke-width="3"/></svg>
+    <div class="wrap">
+      <span class="eyebrow">✦ 24 little chaos objects</span>
+      <h1>SHOP THE CHAOS</h1>
+      <p>Meme-inspired things for your tote, your outfit, and your questionable life choices.</p>
+    </div>
+  </section>
+
+  <!-- CATEGORY TABS -->
+  <div class="cat-tabs-section">
+    <div class="cat-tabs" id="catTabs">
+      <button class="cat-tab active" data-cat="all">ALL</button>
+      <button class="cat-tab" data-cat="totes">TOTES</button>
+      <button class="cat-tab" data-cat="pins">PINS</button>
+      <button class="cat-tab" data-cat="new">NEW DROPS</button>
+      <button class="cat-tab" data-cat="bestseller">BESTSELLERS</button>
+    </div>
+  </div>
+
+  <!-- FILTER + SORT -->
+  <section class="filter-bar">
+    <div class="wrap">
+      <div class="fb-left">
+        <button class="fb-btn" id="filterBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+          FILTER
+          <span class="fb-count" id="filterCount" style="display:none;">0</span>
+        </button>
+        <span class="result-count" id="resultCount">24 things</span>
+
+        <div class="dropdown-panel" id="filterPanel">
+          <div class="panel-group">
+            <h5>Category</h5>
+            <label class="panel-option"><input type="checkbox" value="totes" data-group="category"> Totes</label>
+            <label class="panel-option"><input type="checkbox" value="pins" data-group="category"> Pins</label>
+          </div>
+          <div class="panel-group">
+            <h5>Collection</h5>
+            <label class="panel-option"><input type="checkbox" value="new" data-group="collection"> New Drops</label>
+            <label class="panel-option"><input type="checkbox" value="bestseller" data-group="collection"> Bestsellers</label>
+          </div>
+          <div class="panel-group">
+            <h5>Price</h5>
+            <label class="panel-option"><input type="radio" name="price" value="all" data-group="price" checked> Any price</label>
+            <label class="panel-option"><input type="radio" name="price" value="under150" data-group="price"> Under R150</label>
+            <label class="panel-option"><input type="radio" name="price" value="150to400" data-group="price"> R150 – R400</label>
+            <label class="panel-option"><input type="radio" name="price" value="over400" data-group="price"> Over R400</label>
+          </div>
+          <div class="panel-group">
+            <h5>Availability</h5>
+            <label class="panel-option"><input type="checkbox" value="instock" data-group="availability"> In stock only</label>
+          </div>
+          <button class="panel-clear" id="clearFilters">CLEAR ALL FILTERS</button>
+        </div>
+      </div>
+
+      <div class="fb-right">
+        <button class="fb-btn" id="sortBtn">
+          SORT BY: <span id="sortLabel">Featured</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="dropdown-panel" id="sortPanel">
+          <button class="sort-option active" data-sort="featured">Featured</button>
+          <button class="sort-option" data-sort="newest">Newest</button>
+          <button class="sort-option" data-sort="bestselling">Best Selling</button>
+          <button class="sort-option" data-sort="lowhigh">Price: Low → High</button>
+          <button class="sort-option" data-sort="highlow">Price: High → Low</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT GRID PART 1 -->
+  <section class="shop-grid-section">
+    <div class="wrap">
+      <div class="product-grid" id="grid1"></div>
+      <div class="empty-state" id="emptyState">
+        <svg class="edoodle" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#292631" stroke-width="3" stroke-dasharray="7 8"/><circle cx="38" cy="46" r="4" fill="#292631"/><circle cx="62" cy="46" r="4" fill="#292631"/><path d="M36 66q14-10 28 0" stroke="#292631" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+        <h3>UH OH. NOTHING HERE.</h3>
+        <p>we searched. we panicked. we found absolutely nothing.</p>
+        <button class="btn btn-primary" id="clearFromEmpty">CLEAR FILTERS →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MID BANNER -->
+  <section class="mid-banner" id="midBanner">
+    <svg class="mid-doodle float" style="top:12%; left:6%; width:50px;" viewBox="0 0 100 100"><path d="M50 10l6 14 15 2-11 10 3 15-13-8-13 8 3-15-11-10 15-2z" fill="#292631"/></svg>
+    <svg class="mid-doodle float -rev" style="bottom:14%; right:8%; width:56px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#292631" stroke-width="4"/></svg>
+    <div class="wrap">
+      <h2>YOUR BAG LOOKS<br>BORING.</h2>
+      <p>we can fix that.</p>
+      <a href="#" class="btn btn-primary" data-filter-shortcut="pins">SHOP PINS →</a>
+    </div>
+  </section>
+
+  <!-- PRODUCT GRID PART 2 -->
+  <section class="shop-grid-section">
+    <div class="wrap">
+      <div class="product-grid" id="grid2"></div>
+    </div>
+  </section>
+
+  <!-- SHOP BY MOOD -->
+  <section class="mood-section">
+    <div class="wrap">
+      <div class="mood-head">
+        <h2>SHOP BY MOOD</h2>
+        <p>don't know which product you want? you know your mood.</p>
+      </div>
+      <div class="mood-grid" id="moodGrid">
+        <button class="mood-chip" data-mood="whimsical">WHIMSICAL</button>
+        <button class="mood-chip" data-mood="unhinged">UNHINGED</button>
+        <button class="mood-chip" data-mood="relatable">RELATABLE</button>
+        <button class="mood-chip" data-mood="cute">CUTE</button>
+        <button class="mood-chip" data-mood="chaotic">CHAOTIC</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT GRID PART 3 -->
+  <section class="shop-grid-section">
+    <div class="wrap">
+      <div class="product-grid" id="grid3"></div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta">
+    <div class="wrap">
+      <h2>DID YOU FIND YOUR<br>NEW PERSONALITY?</h2>
+      <p>If not, there are more tiny pieces of chaos waiting.</p>
+      <div class="bottom-cta-ctas">
+        <a href="#" id="bestsellersCta" class="btn btn-primary">SHOP BESTSELLERS →</a>
+        <a href="index.html#signup" class="btn-ghost">JOIN THE EMAIL LIST →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">whimsy<span>.</span>co</a>
+        <p>get your whimsy back.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="shop.html?category=totes">Totes</a>
+        <a href="shop.html?category=pins">Pins</a>
+        <a href="shop.html?collection=new">New Drops</a>
+        <a href="shop.html?collection=bestseller">Bestsellers</a>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <a href="#">FAQ</a>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Brand</h4>
+        <a href="index.html#story">About</a>
+        <a href="index.html#story">Our Story</a>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">Pinterest</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 whimsy co. all rights reserved.</span>
+      <span>made with too much internet</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ========================= PRODUCT DATA ========================= */
+const ICONS = {
+  tote: `<path d="M20 34h60l-6 52H26z" fill="{{bg}}" stroke="#292631" stroke-width="3"/><path d="M32 34c0-12 6-18 18-18s18 6 18 18" fill="none" stroke="#292631" stroke-width="4"/>`,
+  toteFace: `<path d="M20 34h60l-6 52H26z" fill="{{bg}}" stroke="#292631" stroke-width="3"/><path d="M32 34c0-12 6-18 18-18s18 6 18 18" fill="none" stroke="#292631" stroke-width="4"/><circle cx="42" cy="58" r="4" fill="#292631"/><circle cx="58" cy="58" r="4" fill="#292631"/><path d="M40 70q10 8 20 0" stroke="#292631" stroke-width="3" fill="none" stroke-linecap="round"/>`,
+  toteLines: `<path d="M20 34h60l-6 52H26z" fill="{{bg}}" stroke="#292631" stroke-width="3"/><path d="M32 34c0-12 6-18 18-18s18 6 18 18" fill="none" stroke="#292631" stroke-width="4"/><path d="M38 55h24M38 65h16" stroke="#292631" stroke-width="2"/>`,
+  pinRound: `<circle cx="50" cy="50" r="30" fill="{{bg}}" stroke="#292631" stroke-width="3"/><path d="M38 46c4-6 20-6 24 0M40 60c6 5 14 5 20 0" stroke="#292631" stroke-width="3" fill="none" stroke-linecap="round"/>`,
+  pinStar: `<path d="M50 20l7 18 19 2-14 13 4 19-16-10-16 10 4-19-14-13 19-2z" fill="{{bg}}" stroke="#292631" stroke-width="3"/>`,
+  pinDouble: `<circle cx="38" cy="46" r="16" fill="{{bg}}" stroke="#292631" stroke-width="3"/><circle cx="62" cy="60" r="16" fill="{{bg}}" stroke="#292631" stroke-width="3"/>`,
+  pinHeart: `<path d="M50 78C28 62 16 46 19 32c2-11 17-15 25-5 3 4 5 6 6 6s3-2 6-6c8-10 23-6 25 5 3 14-9 30-31 46z" fill="{{bg}}" stroke="#292631" stroke-width="3"/>`,
+  keychain: `<rect x="30" y="26" width="40" height="50" rx="8" fill="{{bg}}" stroke="#292631" stroke-width="3"/><circle cx="50" cy="20" r="6" fill="none" stroke="#292631" stroke-width="3"/>`,
+  pinCat: `<circle cx="50" cy="54" r="26" fill="{{bg}}" stroke="#292631" stroke-width="3"/><path d="M30 36l8 10M70 36l-8 10" stroke="#292631" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="42" cy="52" r="3" fill="#292631"/><circle cx="58" cy="52" r="3" fill="#292631"/>`,
+};
+
+const BGS = ['#FFF9EE','#F7B6D2','#B9DDF5','#C9B8F4','#FFF1B8','#BFE8D0'];
+
+const PRODUCTS = [
+  { id:'p1',  name:'"It\'s Giving Anxiety" Tote',      price:450, category:'totes', collections:['bestseller'], mood:'relatable', badge:'popular',   icon:'toteFace',  rating:5, stock:true,  order:1 },
+  { id:'p2',  name:'"Certified Feral" Enamel Pin',       price:120, category:'pins',  collections:['bestseller'], mood:'unhinged',  badge:'popular',   icon:'pinRound',  rating:5, stock:true,  order:2 },
+  { id:'p3',  name:'"Not My Final Form" Tote',           price:480, category:'totes', collections:['bestseller'], mood:'chaotic',   badge:'last',      icon:'toteLines', rating:5, stock:true,  order:3 },
+  { id:'p4',  name:'"Delulu Is The Solulu" Pin Set',     price:180, category:'pins',  collections:['bestseller'], mood:'unhinged',  badge:'popular',   icon:'pinDouble', rating:5, stock:true,  order:4 },
+  { id:'p5',  name:'Gremlin Mode Tote',                  price:460, category:'totes', collections:['new'],       mood:'chaotic',   badge:'new',       icon:'tote',      rating:4, stock:true,  order:5 },
+  { id:'p6',  name:'Feral Little Guy Pin',                price:130, category:'pins',  collections:['new'],       mood:'unhinged',  badge:'new',       icon:'pinCat',    rating:4, stock:true,  order:6 },
+  { id:'p7',  name:'Chaos Goblin Keychain',                price:95,  category:'pins',  collections:['new'],       mood:'chaotic',   badge:'new',       icon:'keychain',  rating:4, stock:true,  order:7 },
+  { id:'p8',  name:'"Soft Launch My Sanity" Tote',        price:440, category:'totes', collections:[],            mood:'relatable', badge:'',          icon:'toteFace',  rating:4, stock:true,  order:8 },
+  { id:'p9',  name:'"Main Character Energy" Pin',          price:120, category:'pins',  collections:[],            mood:'whimsical', badge:'',          icon:'pinStar',   rating:5, stock:true,  order:9 },
+  { id:'p10', name:'"Emotional Support Chaos" Tote',       price:465, category:'totes', collections:[],            mood:'chaotic',   badge:'unhinged',  icon:'toteLines', rating:4, stock:true,  order:10 },
+  { id:'p11', name:'"Small But Unhinged" Pin',             price:110, category:'pins',  collections:[],            mood:'unhinged',  badge:'unhinged',  icon:'pinRound',  rating:5, stock:true,  order:11 },
+  { id:'p12', name:'"Soft Girl, Feral Heart" Tote',        price:455, category:'totes', collections:[],            mood:'cute',      badge:'back',      icon:'tote',      rating:4, stock:true,  order:12 },
+  { id:'p13', name:'"It\'s The Cortisol For Me" Pin',      price:120, category:'pins',  collections:[],            mood:'relatable', badge:'',          icon:'pinHeart',  rating:4, stock:false, order:13 },
+  { id:'p14', name:'Cottagecore Cryptid Tote',             price:470, category:'totes', collections:[],            mood:'whimsical', badge:'',          icon:'toteFace',  rating:5, stock:true,  order:14 },
+  { id:'p15', name:'"Just Vibing, Barely" Pin Set',        price:190, category:'pins',  collections:[],            mood:'relatable', badge:'',          icon:'pinDouble', rating:4, stock:true,  order:15 },
+  { id:'p16', name:'Feelings Are Fake Keychain',           price:95,  category:'pins',  collections:[],            mood:'unhinged',  badge:'',          icon:'keychain',  rating:3, stock:true,  order:16 },
+  { id:'p17', name:'"Certified Whimsy" Tote',              price:450, category:'totes', collections:['bestseller'],mood:'whimsical', badge:'popular',   icon:'tote',      rating:5, stock:true,  order:17 },
+  { id:'p18', name:'"Little Treat Enjoyer" Pin',           price:120, category:'pins',  collections:[],            mood:'cute',      badge:'',          icon:'pinStar',   rating:5, stock:true,  order:18 },
+  { id:'p19', name:'"I Peaked In The Group Chat" Tote',    price:465, category:'totes', collections:[],            mood:'relatable', badge:'',          icon:'toteLines', rating:4, stock:true,  order:19 },
+  { id:'p20', name:'Menace To Society Pin',                price:120, category:'pins',  collections:['new'],       mood:'chaotic',   badge:'new',       icon:'pinCat',    rating:4, stock:true,  order:20 },
+  { id:'p21', name:'"Everything Is Fine" Tote',            price:450, category:'totes', collections:[],            mood:'relatable', badge:'',          icon:'toteFace',  rating:3, stock:true,  order:21 },
+  { id:'p22', name:'"Soft Chaos Only" Pin Set',            price:180, category:'pins',  collections:[],            mood:'cute',      badge:'',          icon:'pinDouble', rating:4, stock:true,  order:22 },
+  { id:'p23', name:'Little Weird Guy Keychain',            price:95,  category:'pins',  collections:[],            mood:'whimsical', badge:'',          icon:'keychain',  rating:4, stock:false, order:23 },
+  { id:'p24', name:'"Manifesting Chaos" Tote',             price:475, category:'totes', collections:['new'],       mood:'chaotic',   badge:'new',       icon:'toteLines', rating:5, stock:true,  order:24 },
+];
+
+const BADGE_LABEL = {
+  new:'NEW', popular:"OH, THIS ONE'S POPULAR", limited:'LIMITED',
+  back:'BACK AGAIN', last:'LAST FEW', unhinged:'MILDLY UNHINGED',
+};
+
+/* ========================= STATE ========================= */
+let state = {
+  tab: 'all',       // all | totes | pins | new | bestseller
+  mood: null,
+  categoryChecks: [],
+  collectionChecks: [],
+  price: 'all',
+  inStockOnly: false,
+  sort: 'featured',
+};
+
+function iconSvg(product, bg){
+  const raw = ICONS[product.icon].replaceAll('{{bg}}', bg);
+  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${raw}</svg>`;
+}
+
+function passesFilters(p){
+  if(state.tab === 'totes' && p.category !== 'totes') return false;
+  if(state.tab === 'pins' && p.category !== 'pins') return false;
+  if(state.tab === 'new' && !p.collections.includes('new')) return false;
+  if(state.tab === 'bestseller' && !p.collections.includes('bestseller')) return false;
+
+  if(state.mood && p.mood !== state.mood) return false;
+
+  if(state.categoryChecks.length && !state.categoryChecks.includes(p.category)) return false;
+  if(state.collectionChecks.length && !state.collectionChecks.some(c => p.collections.includes(c))) return false;
+
+  if(state.price === 'under150' && p.price >= 150) return false;
+  if(state.price === '150to400' && (p.price < 150 || p.price > 400)) return false;
+  if(state.price === 'over400' && p.price <= 400) return false;
+
+  if(state.inStockOnly && !p.stock) return false;
+
+  return true;
+}
+
+function sortProducts(list){
+  const arr = [...list];
+  switch(state.sort){
+    case 'newest': return arr.sort((a,b)=> (b.collections.includes('new')?1:0) - (a.collections.includes('new')?1:0) || a.order-b.order);
+    case 'bestselling': return arr.sort((a,b)=> (b.collections.includes('bestseller')?1:0) - (a.collections.includes('bestseller')?1:0) || b.rating - a.rating);
+    case 'lowhigh': return arr.sort((a,b)=> a.price - b.price);
+    case 'highlow': return arr.sort((a,b)=> b.price - a.price);
+    default: return arr.sort((a,b)=> a.order - b.order);
+  }
+}
+
+function cardHTML(p, bgIndex){
+  const bg = BGS[bgIndex % BGS.length];
+  const bgAlt = BGS[(bgIndex + 2) % BGS.length];
+  const badgeHTML = p.badge ? `<span class="badge -${p.badge}">${BADGE_LABEL[p.badge]}</span>` : '';
+  const outOfStock = !p.stock;
+  return `
+    <div class="product-card reveal in-view" data-id="${p.id}">
+      <div class="product-thumb" style="background:${bg};">
+        ${badgeHTML}
+        <div class="thumb-main">${iconSvg(p, bg)}</div>
+        <div class="thumb-alt" style="background:${bgAlt};">${iconSvg(p, bgAlt)}</div>
+        <span class="quick-add" data-product="${p.id}">${outOfStock ? 'OUT OF STOCK' : 'QUICK ADD +'}</span>
+      </div>
+      <div class="product-info">
+        <div class="pname">${p.name}</div>
+        <div class="prow">
+          <span class="price">R${p.price}</span>
+          <span class="stars">${'★'.repeat(p.rating)}${'☆'.repeat(5-p.rating)}</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ========================= RENDER ========================= */
+function render(){
+  const filtered = sortProducts(PRODUCTS.filter(passesFilters));
+
+  const grid1 = document.getElementById('grid1');
+  const grid2 = document.getElementById('grid2');
+  const grid3 = document.getElementById('grid3');
+  const empty = document.getElementById('emptyState');
+  const midBanner = document.getElementById('midBanner');
+
+  document.getElementById('resultCount').textContent = filtered.length + (filtered.length === 1 ? ' thing' : ' things');
+
+  if(filtered.length === 0){
+    grid1.innerHTML = ''; grid2.innerHTML = ''; grid3.innerHTML = '';
+    empty.classList.add('show');
+    midBanner.style.display = 'none';
+    attachCardEvents();
+    return;
+  }
+  empty.classList.remove('show');
+
+  const part1 = filtered.slice(0, 8);
+  const part2 = filtered.slice(8, 16);
+  const part3 = filtered.slice(16);
+
+  grid1.innerHTML = part1.map((p,i)=>cardHTML(p,i)).join('');
+  grid2.innerHTML = part2.map((p,i)=>cardHTML(p,i)).join('');
+  grid3.innerHTML = part3.map((p,i)=>cardHTML(p,i)).join('');
+
+  midBanner.style.display = part2.length || part3.length || filtered.length > 8 ? 'block' : (filtered.length > 8 ? 'block' : 'none');
+  if (filtered.length <= 8) midBanner.style.display = 'none'; else midBanner.style.display = 'block';
+
+  attachCardEvents();
+}
+
+function attachCardEvents(){
+  document.querySelectorAll('.quick-add').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if(btn.textContent.includes('OUT OF STOCK')) return;
+      btn.textContent = 'ADDED ✓';
+      btn.classList.add('added');
+      cartCount++;
+      document.getElementById('cartCount').textContent = cartCount;
+      setTimeout(() => {
+        btn.textContent = 'QUICK ADD +';
+        btn.classList.remove('added');
+      }, 1400);
+    });
+  });
+}
+
+let cartCount = 0;
+
+/* ========================= EVENTS: TABS ========================= */
+document.querySelectorAll('.cat-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    state.tab = tab.dataset.cat;
+    render();
+  });
+});
+
+/* ========================= EVENTS: FILTER PANEL ========================= */
+const filterBtn = document.getElementById('filterBtn');
+const filterPanel = document.getElementById('filterPanel');
+const sortBtn = document.getElementById('sortBtn');
+const sortPanel = document.getElementById('sortPanel');
+
+function closeAllPanels(except){
+  [filterPanel, sortPanel].forEach(p => { if(p !== except) p.classList.remove('open'); });
+}
+
+filterBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  filterPanel.classList.toggle('open');
+  closeAllPanels(filterPanel);
+});
+sortBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  sortPanel.classList.toggle('open');
+  closeAllPanels(sortPanel);
+});
+document.addEventListener('click', () => closeAllPanels(null));
+filterPanel.addEventListener('click', e => e.stopPropagation());
+sortPanel.addEventListener('click', e => e.stopPropagation());
+
+function updateFilterCount(){
+  const n = state.categoryChecks.length + state.collectionChecks.length + (state.price !== 'all' ? 1 : 0) + (state.inStockOnly ? 1 : 0);
+  const badge = document.getElementById('filterCount');
+  if(n > 0){ badge.style.display='flex'; badge.textContent = n; } else { badge.style.display='none'; }
+}
+
+filterPanel.querySelectorAll('input[type=checkbox][data-group="category"]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    state.categoryChecks = [...filterPanel.querySelectorAll('input[data-group="category"]:checked')].map(i=>i.value);
+    updateFilterCount(); render();
+  });
+});
+filterPanel.querySelectorAll('input[type=checkbox][data-group="collection"]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    state.collectionChecks = [...filterPanel.querySelectorAll('input[data-group="collection"]:checked')].map(i=>i.value);
+    updateFilterCount(); render();
+  });
+});
+filterPanel.querySelectorAll('input[data-group="price"]').forEach(rb => {
+  rb.addEventListener('change', () => {
+    state.price = filterPanel.querySelector('input[data-group="price"]:checked').value;
+    updateFilterCount(); render();
+  });
+});
+filterPanel.querySelectorAll('input[data-group="availability"]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    state.inStockOnly = cb.checked;
+    updateFilterCount(); render();
+  });
+});
+
+function clearAllFilters(){
+  state.categoryChecks = []; state.collectionChecks = []; state.price = 'all'; state.inStockOnly = false;
+  state.tab = 'all'; state.mood = null;
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelector('.cat-tab[data-cat="all"]').classList.add('active');
+  document.querySelectorAll('.mood-chip').forEach(c=>c.classList.remove('active'));
+  filterPanel.querySelectorAll('input[type=checkbox]').forEach(cb=>cb.checked=false);
+  filterPanel.querySelector('input[value="all"]').checked = true;
+  updateFilterCount(); render();
+}
+document.getElementById('clearFilters').addEventListener('click', clearAllFilters);
+document.getElementById('clearFromEmpty').addEventListener('click', clearAllFilters);
+
+/* ========================= EVENTS: SORT ========================= */
+document.querySelectorAll('.sort-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.sort-option').forEach(o=>o.classList.remove('active'));
+    opt.classList.add('active');
+    state.sort = opt.dataset.sort;
+    document.getElementById('sortLabel').textContent = opt.textContent;
+    sortPanel.classList.remove('open');
+    render();
+  });
+});
+
+/* ========================= EVENTS: MOOD ========================= */
+document.querySelectorAll('.mood-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const isActive = chip.classList.contains('active');
+    document.querySelectorAll('.mood-chip').forEach(c=>c.classList.remove('active'));
+    if(isActive){
+      state.mood = null;
+    } else {
+      chip.classList.add('active');
+      state.mood = chip.dataset.mood;
+    }
+    render();
+    document.getElementById('grid1').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+
+/* ========================= SHORTCUT LINKS ========================= */
+document.querySelector('[data-filter-shortcut="pins"]').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.querySelector('.cat-tab[data-cat="pins"]').click();
+  document.getElementById('catTabs').scrollIntoView({behavior:'smooth', block:'start'});
+});
+document.getElementById('bestsellersCta').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.querySelector('.cat-tab[data-cat="bestseller"]').click();
+  document.getElementById('catTabs').scrollIntoView({behavior:'smooth', block:'start'});
+});
+
+/* ========================= INIT FROM URL PARAMS ========================= */
+(function initFromURL(){
+  const params = new URLSearchParams(window.location.search);
+  const cat = params.get('category');
+  const col = params.get('collection');
+  let targetTab = 'all';
+  if(cat === 'totes') targetTab = 'totes';
+  if(cat === 'pins') targetTab = 'pins';
+  if(col === 'new') targetTab = 'new';
+  if(col === 'bestseller') targetTab = 'bestseller';
+  state.tab = targetTab;
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === targetTab));
+})();
+
+/* ========================= MOBILE MENU ========================= */
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburgerBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+/* ========================= SCROLL REVEAL (static sections) ========================= */
+const revealEls = document.querySelectorAll('.shop-hero .wrap, .mid-banner .wrap, .mood-head, .bottom-cta .wrap');
+revealEls.forEach(el => el.classList.add('reveal'));
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => io.observe(el));
+
+/* ========================= INITIAL RENDER ========================= */
+render();
+</script>
+
+</body>
+</html>
