@@ -83,3 +83,9 @@ body.account-auth{height:100vh;height:100dvh;min-height:0;overflow:hidden;displa
   .account-auth .auth-help{margin-top:0}
   .account-auth .auth-help .text-button{min-height:26px;font-size:10px}
 }
+/* Keep the password eye within the field, with room for long values. */
+.auth-form .auth-password input{padding-right:48px}
+.auth-form .password-toggle{position:absolute;right:0;top:0;display:grid;place-items:center;width:44px;height:100%;padding:0;border:0;border-radius:0 10px 10px 0;background:transparent;color:#726080;cursor:pointer;box-shadow:none}
+.auth-form .password-toggle svg{width:19px;height:19px;pointer-events:none}
+.auth-form .password-toggle:hover{background:#8866bb0d;color:#7041ad}
+.auth-form .password-toggle:focus-visible{outline:2px solid #9470d7;outline-offset:1px}

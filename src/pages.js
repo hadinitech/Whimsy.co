@@ -3,7 +3,7 @@ import { mountAdmin } from './admin.js';
 import './account.css';
 import './customer.css';
 import { mountCustomerDashboard, unmountCustomerDashboard } from './customer.js';
-import { authView } from './auth-view.js';
+import { authView, bindPasswordVisibility } from './auth-view.js';
 import { finishPageLoading, beginPageLoading } from './loader.js';
 import { store, supabase, money, escapeHTML as esc, safeImage } from './store.js';
 import { ICONS } from './catalog.js';
@@ -35,6 +35,7 @@ function authForm(mode = 'login') {
   unmountCustomerDashboard();
   document.body.classList.add('account-auth');
   app.innerHTML = authView(mode);
+  bindPasswordVisibility(app);
   app.querySelectorAll('[data-mode]').forEach(el => el.addEventListener('click', () => authForm(el.dataset.mode)));
   if (store.user) {
     const back = document.createElement('button');

@@ -5,10 +5,24 @@ const paths = {
   heart: '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0l-1 1-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',
   bag: '<path d="M5 7h14l1 14H4L5 7Z"/><path d="M9 10V5a3 3 0 0 1 6 0v5"/>',
   phone: '<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M11 18h2"/>',
-  arrow: '<path d="M4 12h16m-6-6 6 6-6 6"/>'
+  arrow: '<path d="M4 12h16m-6-6 6 6-6 6"/>',
+  eye: '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
+  eyeOff: '<path d="m3 3 18 18M10.6 5.1 12 5c6.5 0 10 7 10 7a19 19 0 0 1-3.1 3.9M6.2 6.2A22 22 0 0 0 2 12s3.5 7 10 7c1.9 0 3.6-.6 5-1.4M9.9 9.9a3 3 0 0 0 4.2 4.2"/>'
 };
 const icon = name => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]}</svg>`;
-const field = (id, label, type, autocomplete, extra = '') => `<label for="${id}">${label}</label><div class="auth-input">${icon(id === 'name' ? 'person' : id === 'email' ? 'email' : 'lock')}<input id="${id}" name="${id}" type="${type}" autocomplete="${autocomplete}" ${extra} required></div>`;
+const field = (id, label, type, autocomplete, extra = '') => `<label for="${id}">${label}</label><div class="auth-input${type === 'password' ? ' auth-password' : ''}">${icon(id === 'name' ? 'person' : id === 'email' ? 'email' : 'lock')}<input id="${id}" name="${id}" type="${type}" autocomplete="${autocomplete}" ${extra} required>${type === 'password' ? `<button type="button" class="password-toggle" data-toggle-password aria-label="Show password" aria-controls="${id}">${icon('eye')}</button>` : ''}</div>`;
+
+export function bindPasswordVisibility(root) {
+  root.querySelectorAll('[data-toggle-password]').forEach(button => {
+    const input = button.parentElement.querySelector('input');
+    button.addEventListener('click', () => {
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      button.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      button.innerHTML = icon(show ? 'eyeOff' : 'eye');
+    });
+  });
+}
 
 export function authView(mode) {
   const recovery = mode === 'update';
