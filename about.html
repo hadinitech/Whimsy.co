@@ -901,15 +901,43 @@
       .cta-btns, .hero-ctas { flex-direction: column; align-items: stretch; }
       .cta-btns .btn, .hero-ctas .btn { width: 100%; justify-content: center; }
     }
+
+    @media (max-width: 680px) {
+      .wrap { padding: 0 16px; }
+      nav.main { padding: 12px 16px; }
+      .mobile-menu { padding: 10px 16px 18px; }
+      .hero { padding: 48px 0 60px; }
+      .hero-copy h1 { font-size: clamp(38px, 12vw, 62px); }
+      .hero-art { height: clamp(250px, 78vw, 330px); }
+      .hero-scene .tote {
+        left: clamp(28px, 12vw, 68px);
+        bottom: 30px;
+        width: clamp(170px, 58vw, 240px);
+        height: clamp(160px, 53vw, 220px);
+      }
+      .hero-scene .pin {
+        right: clamp(20px, 14vw, 78px);
+        top: 48px;
+        width: clamp(88px, 30vw, 120px);
+        height: clamp(88px, 30vw, 120px);
+      }
+      .hero-scene .mini {
+        right: clamp(100px, 42vw, 170px);
+        bottom: 44px;
+        width: clamp(76px, 28vw, 110px);
+        height: clamp(76px, 28vw, 110px);
+      }
+      .story-section, .philosophy, .products, .founder, .manifesto, .community, .cta {
+        padding-top: 64px;
+        padding-bottom: 64px;
+      }
+      .founder-photo { min-height: clamp(300px, 95vw, 420px); }
+      .story-copy .pull { font-size: 22px; }
+      footer.site { padding: 54px 0 24px; }
+    }
   </style>
 </head>
 <body>
-  <div class="announce">
-    <div class="announce-track">
-      <span>✦ FREE SHIPPING ON ORDERS OVER R600 ✦ NEW PINS EVERY FRIDAY ✦ RETURNS ARE PAINLESS, WE PROMISE ✦</span>
-      <span>✦ FREE SHIPPING ON ORDERS OVER R600 ✦ NEW PINS EVERY FRIDAY ✦ RETURNS ARE PAINLESS, WE PROMISE ✦</span>
-    </div>
-  </div>
 
   <header class="site">
     <nav class="main">
@@ -920,7 +948,6 @@
         <li><a href="contact.html">Contact</a></li>
         </ul>
         <div class="nav-icons">
-        <button aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
         <button aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg></button>
         <button aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.5-9.3-8.8C1.1 8 2.4 4.8 5.6 4.1 8 3.6 10 5 12 7c2-2 4-3.4 6.4-2.9 3.2.7 4.5 3.9 2.9 7.1C19 15.5 12 20 12 20z"/></svg></button>
         <button aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg></button>
@@ -1118,9 +1145,9 @@
         <div class="footer-col">
           <h4>Help</h4>
           <a href="contact.html">Contact</a>
-          <a href="#">FAQ</a>
-          <a href="#">Shipping</a>
-          <a href="#">Returns</a>
+          <a href="policies.html">Store information</a>
+          <a href="policies.html#shipping">Shipping</a>
+          <a href="policies.html#returns">Returns</a>
         </div>
         <div class="footer-col">
           <h4>Brand</h4>
@@ -1153,5 +1180,6 @@
       mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
     }
   </script>
+<script type="module" src="/src/common.js"></script>
 </body>
 </html>

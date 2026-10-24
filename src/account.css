@@ -1,0 +1,85 @@
+/* Dedicated account screen; shared storefront fonts and logo. */
+body.account-page{box-sizing:border-box;--account-ink:#17152e;--account-muted:#64617d;position:relative;isolation:isolate;min-height:100svh;background:#fdfaf5;color:var(--account-ink);padding:clamp(36px,9.5vh,76px) 24px 48px}
+.account-backdrop{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:-1}.account-blob{position:absolute;opacity:.66}.account-blob-pink{width:230px;height:330px;left:-38px;top:49%;color:#f4dfe2;transform:rotate(-4deg)}.account-blob-lavender{width:235px;height:360px;right:-48px;top:9%;color:#e5dcf4}.account-heart{position:absolute;left:5.5%;top:42%;width:36px;height:46px;color:#a06299;transform:rotate(-10deg)}
+.account-brand{text-align:center;position:relative}.account-brand .commerce-logo{font-size:38px;line-height:1.3;letter-spacing:-1.3px;color:#111025}.account-brand .commerce-logo span{color:#7949c9}
+.account-page .account-main{position:relative;width:100%;max-width:1000px;min-height:0;margin:48px auto 0;padding:0}.account-auth .account-main{max-width:744px}.account-main>.loading,.account-main #app>.loading{text-align:center}
+.auth-cards{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;align-items:stretch}.auth-login,.auth-benefits{position:relative;min-width:0;min-height:414px;border:1px solid #eeecf1;border-radius:17px;padding:28px 27px;background:#fff;box-shadow:0 12px 30px #48352b06}.auth-login{padding-top:29px}.auth-eyebrow{font:10px/1.5 var(--mono);letter-spacing:2px;color:#8253cf}.auth-heading{position:relative;display:flex;align-items:center;gap:5px;margin:7px 0 4px}.account-page .auth-heading h1{font:800 34px/1.15 var(--display);letter-spacing:-.8px;margin:0;color:#111020}.auth-sparks{width:32px;height:36px;flex-shrink:0;color:#8b58d4;transform:translateY(-11px)}.account-page .auth-copy{font-size:13px;line-height:1.5;color:var(--account-muted);margin:0}
+.auth-form{margin-top:19px}.auth-form label{font-size:12px;font-weight:500;line-height:1.5;margin:13px 0 4px}.auth-input{position:relative}.auth-input>svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:#252332;pointer-events:none}.auth-form .auth-input input{display:block;min-width:0;height:43px;padding:10px 12px 10px 43px;border:1px solid #d0d7ff;border-radius:10px;background:#f3f5ff;color:#222135;font-size:12px;box-shadow:inset 0 1px 3px #7264af02;transition:border-color .15s,box-shadow .15s}.auth-form .auth-input input:focus{border-color:#9470d7;outline:3px solid #9976dd26;outline-offset:1px;background:#f7f6ff}.auth-form .auth-submit{width:100%;min-height:45px;gap:15px;margin-top:12px;border:0;border-radius:10px;background:linear-gradient(110deg,#7145bf,#7345ca);box-shadow:0 4px 0 #4e258918,0 4px 8px #6740ab14;color:white;font:600 14px 'Plus Jakarta Sans',sans-serif!important;cursor:pointer}.auth-submit>svg{width:20px;height:20px;stroke-width:1.5}.auth-form .auth-submit:hover:not(:disabled){background:#6438b2;transform:none;box-shadow:0 4px 10px #6740ab25}.auth-help{text-align:center;margin-top:7px}.account-page .auth-help .text-button{font-size:11px;color:#504077;min-height:36px;padding:8px;line-height:1.5}.auth-form .form-result{font-size:12px;line-height:1.5;margin:0;min-height:0}.auth-form .form-result:not(:empty){margin-top:10px;padding:9px 11px;border-radius:8px;background:#f6f3fb}.auth-form .form-result.store-error{color:#9c2236;background:#fff1f2}
+.auth-benefits{background:#f4eefe;border-color:#d9c9f7;padding:44px 25px 38px;overflow:hidden;box-shadow:0 10px 24px #634f8d03}.account-page .auth-benefits h2{font:800 25px/1.1 var(--display);letter-spacing:-.2px;margin:0 0 10px;color:#25203f}.benefits-sparks{position:absolute;right:20px;top:21px;width:32px;height:38px;color:#30244f}.auth-benefit-list{list-style:none;margin:18px 0 0;padding:19px 0 0;border-top:1px solid #e5d9f8;display:grid;gap:20px}.auth-benefit-list li{display:flex;align-items:center;gap:15px}.benefit-icon{display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;border-radius:50%;background:#e8dcfa;color:#241d40}.benefit-icon svg{width:24px;height:24px}.account-page .auth-benefit-list h3{font:600 12px/1.5 'Plus Jakarta Sans',sans-serif;margin:0 0 3px}.account-page .auth-benefit-list p{font-size:10.5px;line-height:1.5;color:#655e7b;margin:0}.benefits-loop{position:absolute;bottom:19px;right:-5px;width:79px;height:40px;color:#8150c6}.account-page .auth-create{margin:17px 0 0;text-align:center;font-size:11px;color:#777086}.account-page .auth-create .text-button{font-size:11px;color:#675084;padding:4px;font-weight:500;min-height:30px}.auth-create a{text-underline-offset:3px}
+@media(min-width:1400px){.account-auth .account-main{max-width:820px}.auth-login,.auth-benefits{padding-left:30px;padding-right:30px}.auth-login{padding-top:32px}.auth-benefits{padding-top:46px}.auth-cards{gap:20px}.auth-login,.auth-benefits{min-height:430px}}
+@media(max-width:800px){body.account-page{padding:34px 20px 36px}.account-brand .commerce-logo{font-size:34px}.account-page .account-main{margin-top:30px}.auth-cards{grid-template-columns:1fr;gap:18px;max-width:420px;margin:auto}.auth-login,.auth-benefits{min-height:0;padding:27px 25px;border-radius:17px}.auth-login{padding-bottom:23px}.account-page .auth-heading h1{font-size:33px}.auth-benefits{padding-top:29px;padding-bottom:48px}.auth-benefit-list{gap:19px}.auth-benefit-list p{font-size:11px}.account-heart{display:none}.account-blob-pink{left:-155px;top:28%}.account-blob-lavender{right:-155px;top:56%}.auth-form .auth-input input{font-size:16px;height:47px}.auth-form .auth-submit{min-height:47px}.auth-help .text-button{min-height:40px}.account-page .auth-create{margin-top:13px}.account-page .store-grid{grid-template-columns:1fr}}
+@media(max-width:359px){body.account-page{padding-inline:14px}.auth-login,.auth-benefits{padding-inline:21px}.account-page .auth-heading h1{font-size:29px}.auth-sparks{width:25px}.account-backdrop{display:none}}
+@media(prefers-reduced-motion:reduce){.account-page *{transition:none!important}}
+
+/* One viewport-sized shell for sign in, signup and password recovery. */
+body.account-auth{height:100vh;height:100dvh;min-height:0;overflow:hidden;display:flex;flex-direction:column;padding:clamp(12px,4vh,40px) 24px;gap:clamp(12px,3vh,24px)}
+.account-auth .account-brand{flex:none}.account-auth .account-brand .commerce-logo{font-size:34px;line-height:1.2}
+.account-auth .account-main{flex:1;min-height:0;margin:0 auto;display:flex;align-items:center;justify-content:center}
+.account-auth #app{width:100%;max-height:100%;display:flex;flex-direction:column;gap:10px}
+.account-auth .auth-cards{height:min(480px,calc(100dvh - 142px));min-height:0;flex-shrink:1}
+.account-auth .auth-login,.account-auth .auth-benefits{min-height:0;padding:24px}
+.account-auth .auth-login{display:flex;flex-direction:column}
+.account-auth .auth-heading h1{font-size:32px}.account-auth .auth-heading{margin-top:6px}
+.account-auth .auth-form{margin-top:12px}.account-auth .auth-form label{margin-top:9px}
+.account-auth .auth-input input{height:42px}.account-auth .auth-submit{min-height:43px;padding-block:10px;margin-top:12px}
+.account-auth .auth-help{margin-top:3px}.account-auth .auth-help .text-button{min-height:32px;padding-block:6px}
+.account-auth .auth-benefits{display:flex;flex-direction:column;justify-content:center}
+.account-auth .auth-create{flex:none;margin:0;line-height:1.4}.account-auth .auth-create .text-button{min-height:28px}
+.account-auth .form-result:not(:empty){margin-top:6px;padding:6px 8px;font-size:11px}
+@media(max-width:800px){
+  body.account-auth{padding:16px 20px;gap:16px}
+  .account-auth .account-main{max-width:420px;align-items:center}
+  .account-auth #app{height:100%;max-height:740px;gap:8px}
+  .account-auth .auth-cards{flex:1;height:auto;min-height:0;width:100%;grid-template-rows:minmax(0,1fr) auto;gap:12px}
+  .account-auth .auth-login{padding:22px 24px;justify-content:center}
+  .account-auth .auth-heading h1{font-size:30px}
+  .account-auth .auth-input input{height:42px;font-size:16px}
+  .account-auth .auth-submit{min-height:43px}
+  .account-auth .auth-benefits{padding:14px 20px}
+  .account-auth .auth-benefits h2{font-size:21px;margin-bottom:4px;padding-right:20px}
+  .account-auth .auth-benefits h2 br{display:none}
+  .account-auth .auth-benefits>.auth-copy{font-size:11px;line-height:1.4}
+  .account-auth .auth-benefit-list{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px;padding-top:10px}
+  .account-auth .auth-benefit-list li{flex-direction:column;gap:5px;text-align:center}
+  .account-auth .benefit-icon{width:28px;height:28px}.account-auth .benefit-icon svg{width:18px;height:18px}
+  .account-auth .auth-benefit-list h3{font-size:10px;line-height:1.3;margin:0}
+  .account-auth .auth-benefit-list p,.account-auth .benefits-loop{display:none}
+  .account-auth .benefits-sparks{top:9px;right:12px;width:24px;height:30px}
+}
+@media(max-height:700px) and (max-width:800px){
+  .account-auth .auth-benefits{display:none}
+  .account-auth .auth-cards{grid-template-rows:minmax(0,1fr)}
+  .account-auth #app{max-height:510px}
+}
+@media(max-height:620px){
+  body.account-auth{padding:12px 20px;gap:10px}
+  .account-auth .account-brand .commerce-logo{font-size:28px}
+  .account-auth .auth-login{padding:18px 22px}
+  .account-auth .auth-heading h1{font-size:28px}
+  .account-auth .auth-copy{font-size:12px;line-height:1.4}
+  .account-auth .auth-heading{margin-top:4px}
+  .account-auth .auth-form{margin-top:8px}
+  .account-auth .auth-form label{margin-top:7px;font-size:11px}
+  .account-auth .auth-input input{height:38px}
+  .account-auth .auth-submit{min-height:38px;margin-top:9px;padding-block:8px}
+  .account-auth .auth-help .text-button{min-height:28px;padding-block:4px}
+  .account-auth .auth-create{font-size:10px}
+  .account-auth .auth-create .text-button{font-size:10px;min-height:24px}
+}
+@media(max-height:500px) and (min-width:520px){
+  .account-auth .account-main{max-width:900px}
+  .account-auth .auth-cards{grid-template-columns:1fr;height:calc(100dvh - 108px);max-width:700px}
+  .account-auth .auth-benefits{display:none}
+  .account-auth .auth-login{display:grid;grid-template-columns:.85fr 1.15fr;grid-template-rows:auto auto 1fr;column-gap:24px;align-content:start;align-items:start;padding:16px 22px}
+  .account-auth .auth-eyebrow{grid-column:1;grid-row:1;margin-top:10px}
+  .account-auth .auth-heading{grid-column:1;grid-row:2}
+  .account-auth .auth-heading h1{font-size:27px}
+  .account-auth .auth-copy{grid-column:1;grid-row:3}
+  .account-auth .auth-form{grid-column:2;grid-row:1/4;margin:0}
+  .account-auth .auth-form label:first-child{margin-top:0}
+  .account-auth .auth-input input{height:34px}
+  .account-auth .auth-form label{margin-top:5px;margin-bottom:3px}
+  .account-auth .auth-submit{min-height:34px;padding-block:6px;margin-top:8px}
+  .account-auth .auth-help{margin-top:0}
+  .account-auth .auth-help .text-button{min-height:26px;font-size:10px}
+}

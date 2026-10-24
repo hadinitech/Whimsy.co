@@ -1,0 +1,60 @@
+import { chromium } from '@playwright/test';
+import assert from 'node:assert/strict';
+import { mkdirSync } from 'node:fs';
+
+const browser = await chromium.launch({ channel: 'msedge', headless: true });
+const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const errors = [];
+page.on('pageerror', error => { errors.push(error.message); console.error(error.message); });
+const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:5173';
+try {
+  await page.goto(`${base}/shop.html`);
+  await page.locator('.product-card').first().waitFor();
+  assert.equal(await page.locator('.product-card').count(), 24);
+  await page.locator('.product-card').first().hover();
+  await page.locator('.quick-add').first().click();
+  await page.getByRole('button', { name: 'Cart', exact: true }).click();
+  await page.getByRole('heading', { name: 'Your bag of good things' }).waitFor();
+  await page.locator('.cart-line').waitFor();
+  await page.getByRole('button', { name: /Increase quantity/ }).click();
+  await page.getByLabel('Quantity', { exact: true }).filter({ hasText: '2' }).waitFor();
+  await page.reload();
+  await page.getByLabel('Quantity', { exact: true }).filter({ hasText: '2' }).waitFor();
+  await page.getByRole('link', { name: 'Checkout information' }).click();
+  assert.equal(await page.getByRole('button', { name: 'Checkout unavailable' }).isDisabled(), true);
+  await page.goto(`${base}/product.html?id=p1`);
+  await page.getByRole('button', { name: 'Add to bag +' }).click();
+  await page.goto(`${base}/cart.html`);
+  await page.getByLabel('Quantity', { exact: true }).filter({ hasText: '3' }).waitFor();
+  mkdirSync('artifacts', { recursive: true });
+  await page.screenshot({ path: 'artifacts/cart-desktop.png', fullPage: true });
+  await page.getByRole('button', { name: 'Remove', exact: true }).click();
+  await page.getByRole('heading', { name: 'A little room for something fun' }).waitFor();
+  await page.goto(`${base}/index.html`);
+  const homeAdd = page.locator('.quick-add').first();
+  await homeAdd.scrollIntoViewIfNeeded();
+  await homeAdd.click();
+  await page.goto(`${base}/cart.html`);
+  await page.getByLabel('Quantity', { exact: true }).filter({ hasText: '1' }).waitFor();
+  await page.goto(`${base}/shop.html`);
+  await page.getByRole('searchbox', { name: 'Search products' }).fill('gremlin');
+  assert.equal(await page.locator('.product-card').count(), 1);
+  await page.getByRole('searchbox', { name: 'Search products' }).fill('nothing matches this');
+  assert.equal(await page.locator('.product-card').count(), 0);
+  await page.getByRole('searchbox', { name: 'Search products' }).fill('');
+  await page.locator('.cat-tab[data-cat="totes"]').click();
+  assert.equal(await page.locator('.product-card').count(), 11);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(`${base}/shop.html`);
+  await page.locator('.product-card').first().waitFor();
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Shop should fit on mobile');
+  await page.screenshot({ path: 'artifacts/shop-mobile.png', fullPage: true });
+  for (const route of ['index', 'about', 'contact', 'account', 'admin', 'policies', 'product', 'checkout', 'cart']) {
+    const response = await page.goto(`${base}/${route}.html`);
+    assert.equal(response.status(), 200);
+    await page.waitForTimeout(150);
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${route} should fit on mobile`);
+  }
+  assert.deepEqual(errors, [], 'No browser JavaScript errors');
+  console.log('Browser checks passed: catalog, filters, search, bag persistence, quantities, product details, disabled checkout, all routes and mobile layouts.');
+} finally { await browser.close(); }

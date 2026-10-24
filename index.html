@@ -1,328 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Home - whimsy.co</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="shortcut icon" href="images/Favicon.png" type="image/x-icon">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --pink:#F7B6D2;
-    --buttercream:#FFF1B8;
-    --lavender:#C9B8F4;
-    --blue:#B9DDF5;
-    --mint:#BFE8D0;
-    --peach:#FFD0B5;
-    --cream:#FFF9EE;
-    --charcoal:#292631;
-    --grape:#7654D6;
-
-    --display:'Baloo 2', system-ui, sans-serif;
-    --body:'Plus Jakarta Sans', system-ui, sans-serif;
-    --mono:'Space Mono', monospace;
-
-    --radius-lg:28px;
-    --radius-md:18px;
-    --radius-sm:10px;
-    --container: 1180px;
-  }
-
-  *{ box-sizing:border-box; margin:0; padding:0; }
-  html{ scroll-behavior:smooth; }
-  body{
-    font-family:var(--body);
-    background:var(--cream);
-    color:var(--charcoal);
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  img,svg{ display:block; max-width:100%; }
-  a{ color:inherit; text-decoration:none; }
-  button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
-  ul{ list-style:none; }
-
-  .wrap{ max-width:var(--container); margin:0 auto; padding:0 28px; }
-
-  h1,h2,h3{ font-family:var(--display); line-height:1.02; letter-spacing:-0.01em; }
-
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:var(--mono); font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase;
-    background:var(--cream); color:var(--charcoal);
-    border:1.5px dashed var(--charcoal);
-    padding:6px 14px; border-radius:999px;
-    transform:rotate(-2deg);
-  }
-
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:var(--display); font-weight:700; font-size:16px;
-    padding:14px 26px; border-radius:999px;
-    transition:transform .18s ease, box-shadow .18s ease;
-  }
-  .btn-primary{ background:var(--charcoal); color:var(--cream); box-shadow:4px 4px 0 rgba(41,38,49,0.25); }
-  .btn-primary:hover{ transform:translate(-2px,-2px); box-shadow:6px 6px 0 rgba(41,38,49,0.3); }
-  .btn-ghost{ font-family:var(--display); font-weight:700; font-size:16px; border-bottom:2.5px solid var(--charcoal); padding-bottom:2px; }
-  .btn-ghost:hover{ color:var(--grape); border-color:var(--grape); }
-
-  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
-  .reveal.in-view{ opacity:1; transform:translateY(0); }
-
-  /* ---------- sticker / doodle signature system ---------- */
-  .sticker{
-    position:relative;
-    display:inline-flex; align-items:center; gap:6px;
-    font-family:var(--mono); font-weight:700; font-size:12px; letter-spacing:.04em; text-transform:uppercase;
-    background:var(--cream);
-    border:1.5px solid var(--charcoal);
-    border-radius:999px;
-    padding:7px 14px 7px 10px;
-    box-shadow:3px 3px 0 var(--charcoal);
-  }
-  .sticker::before{ content:"✦"; font-size:11px; }
-  .sticker.-grape{ background:var(--grape); color:var(--cream); border-color:var(--charcoal); }
-  .sticker.-pink{ background:var(--pink); }
-  .sticker.-mint{ background:var(--mint); }
-
-  .doodle{ position:absolute; pointer-events:none; opacity:.9; }
-
-  /* ---------- announcement bar ---------- */
-  .announce{
-    background:var(--charcoal); color:var(--cream);
-    overflow:hidden; white-space:nowrap; padding:9px 0;
-  }
-  .announce-track{
-    display:inline-flex; gap:40px; font-family:var(--mono); font-size:12.5px; letter-spacing:.05em;
-    animation:marquee 22s linear infinite;
-  }
-  @keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-
-  /* ---------- nav ---------- */
-  header.site{ position:sticky; top:0; z-index:50; background:var(--cream); border-bottom:1.5px solid var(--charcoal); }
-  nav.main{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:16px 28px; max-width:var(--container); margin:0 auto;
-  }
-  .logo{ font-family:var(--display); font-weight:800; font-size:22px; letter-spacing:-0.02em; }
-  .logo span{ color:var(--grape); }
-  .nav-links{ display:flex; gap:30px; font-family:var(--display); font-weight:600; font-size:15px; }
-  .nav-links a{ position:relative; }
-  .nav-links a:hover{ color:var(--grape); }
-  .nav-icons{ display:flex; align-items:center; gap:18px; }
-  .nav-icons button{ display:flex; }
-  .nav-icons svg{ width:20px; height:20px; }
-  .hamburger{ display:none; flex-direction:column; gap:5px; }
-  .hamburger span{ width:22px; height:2.5px; background:var(--charcoal); border-radius:2px; }
-
-  .mobile-menu{
-    display:none; flex-direction:column; gap:2px;
-    background:var(--cream); border-top:1.5px solid var(--charcoal);
-    padding:10px 28px 20px;
-  }
-  .mobile-menu.open{ display:flex; }
-  .mobile-menu a{ font-family:var(--display); font-weight:600; font-size:17px; padding:10px 0; border-bottom:1px dashed rgba(41,38,49,.2); }
-
-  /* ---------- hero ---------- */
-  .hero{
-    background:var(--pink);
-    position:relative; overflow:hidden;
-    padding:70px 0 90px;
-  }
-  .hero .wrap{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:40px; align-items:center; position:relative; z-index:2; }
-  .hero-copy h1{ font-size:clamp(46px,6.5vw,84px); margin:18px 0 20px; color:var(--charcoal); }
-  .hero-copy h1 em{ font-style:normal; position:relative; white-space:nowrap; }
-  .hero-copy h1 em svg{ position:absolute; left:-4%; top:100%; width:108%; height:22px; }
-  .hero-copy p{ font-size:18px; max-width:420px; margin-bottom:30px; line-height:1.5; }
-  .hero-ctas{ display:flex; align-items:center; gap:26px; flex-wrap:wrap; }
-
-  .hero-art{ position:relative; height:420px; }
-  .hero-art .doodle svg{ width:100%; height:100%; }
-  .float{ animation:float 5s ease-in-out infinite; }
-  .float.-slow{ animation-duration:7s; }
-  .float.-rev{ animation-direction:reverse; }
-  @keyframes float{ 0%,100%{ transform:translateY(0) rotate(var(--r,0deg)); } 50%{ transform:translateY(-14px) rotate(var(--r,0deg)); } }
-
-  .hero-bg-doodle{ position:absolute; inset:0; z-index:1; opacity:.5; }
-
-  /* ---------- intro ---------- */
-  .intro{ background:var(--cream); padding:100px 0; text-align:center; }
-  .intro .wrap{ max-width:760px; }
-  .intro h2{ font-size:clamp(30px,4.2vw,46px); margin-bottom:22px; }
-  .intro p{ font-size:18px; line-height:1.6; color:#4a4552; margin-bottom:28px; }
-
-  /* ---------- category cards ---------- */
-  .categories{ background:var(--cream); padding-bottom:110px; }
-  .cat-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-  .cat-card{
-    position:relative; border-radius:var(--radius-lg); border:1.5px solid var(--charcoal);
-    padding:44px 36px; min-height:320px; display:flex; flex-direction:column; justify-content:flex-end;
-    overflow:hidden; transition:transform .25s ease;
-  }
-  .cat-card:hover{ transform:translateY(-6px) rotate(-0.4deg); }
-  .cat-card.-totes{ background:var(--blue); }
-  .cat-card.-pins{ background:var(--lavender); }
-  .cat-card h3{ font-size:38px; margin-bottom:8px; }
-  .cat-card p.tag{ font-size:16px; margin-bottom:18px; font-weight:500; }
-  .cat-card .cat-doodle{ position:absolute; top:22px; right:22px; width:70px; opacity:.85; }
-
-  /* ---------- bestsellers ---------- */
-  .bestsellers{ background:var(--cream); padding:100px 0; }
-  .section-head{ text-align:center; max-width:640px; margin:0 auto 50px; }
-  .section-head h2{ font-size:clamp(30px,4.2vw,46px); margin-bottom:10px; }
-  .section-head p{ font-size:16px; color:#4a4552; font-family:var(--mono); }
-
-  .product-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
-  .product-card{
-    background:var(--cream); border:1.5px solid var(--charcoal); border-radius:var(--radius-md);
-    overflow:hidden; transition:transform .2s ease, box-shadow .2s ease;
-  }
-  .product-card:hover{ transform:translateY(-4px); box-shadow:5px 5px 0 rgba(41,38,49,.18); }
-  .product-thumb{ position:relative; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; }
-  .product-thumb svg{ width:62%; height:62%; }
-  .product-card:nth-child(1) .product-thumb{ background:var(--peach); }
-  .product-card:nth-child(2) .product-thumb{ background:var(--mint); }
-  .product-card:nth-child(3) .product-thumb{ background:var(--blue); }
-  .product-card:nth-child(4) .product-thumb{ background:var(--buttercream); }
-  .quick-add{
-    position:absolute; left:10px; right:10px; bottom:10px;
-    background:var(--charcoal); color:var(--cream); border-radius:999px;
-    text-align:center; padding:10px; font-family:var(--display); font-weight:700; font-size:13.5px;
-    transform:translateY(14px); opacity:0; transition:all .2s ease;
-  }
-  .product-card:hover .quick-add{ transform:translateY(0); opacity:1; }
-  .quick-add.added{ background:var(--mint); color:var(--charcoal); }
-  .product-info{ padding:16px 16px 18px; }
-  .product-info .pname{ font-family:var(--display); font-weight:700; font-size:15.5px; margin-bottom:4px; }
-  .product-info .prow{ display:flex; align-items:center; justify-content:space-between; }
-  .product-info .price{ font-weight:700; font-family:var(--mono); font-size:14px; }
-  .stars{ font-size:12px; color:var(--grape); letter-spacing:1px; }
-
-  /* ---------- meme editorial ---------- */
-  .meme{ background:var(--buttercream); padding:110px 0; position:relative; overflow:hidden; }
-  .meme .wrap{ position:relative; z-index:2; text-align:center; }
-  .meme h2{ font-size:clamp(30px,6vw,64px); line-height:1.08; }
-  .meme h2 .quote-line{ display:block; }
-  .meme h2 .highlight{ color:var(--grape); }
-  .meme-sub{ margin-top:26px; font-family:var(--mono); font-size:14px; letter-spacing:.03em; }
-  .meme-doodle{ position:absolute; opacity:.55; }
-
-  /* ---------- new drop ---------- */
-  .drop{ background:var(--lavender); padding:100px 0; }
-  .drop-head{ display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:24px; margin-bottom:44px; }
-  .drop-head h2{ font-size:clamp(30px,4.2vw,48px); }
-  .drop-head p{ font-family:var(--mono); font-size:14px; margin-top:8px; }
-  .drop-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-  .drop-card{
-    background:var(--cream); border:1.5px solid var(--charcoal); border-radius:var(--radius-md);
-    padding:22px; position:relative; transition:transform .2s ease;
-  }
-  .drop-card:hover{ transform:rotate(-1deg) translateY(-4px); }
-  .drop-thumb{ aspect-ratio:4/3; border-radius:var(--radius-sm); margin-bottom:16px; display:flex; align-items:center; justify-content:center; }
-  .drop-card:nth-child(1) .drop-thumb{ background:var(--pink); }
-  .drop-card:nth-child(2) .drop-thumb{ background:var(--mint); }
-  .drop-card:nth-child(3) .drop-thumb{ background:var(--peach); }
-  .drop-thumb svg{ width:58%; }
-  .drop-card .sticker{ position:absolute; top:-12px; left:16px; }
-  .drop-card .pname{ font-family:var(--display); font-weight:700; font-size:16px; margin-bottom:4px; }
-  .drop-card .price{ font-family:var(--mono); font-size:13.5px; }
-
-  /* ---------- pin personality ---------- */
-  .pin-feature{ background:var(--cream); padding:110px 0; }
-  .pin-feature .wrap{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
-  .pin-collage{ position:relative; aspect-ratio:1/1; }
-  .pin-collage svg{ width:100%; height:100%; }
-  .pin-feature h2{ font-size:clamp(32px,4.5vw,50px); margin-bottom:18px; }
-  .pin-feature p{ font-size:17px; line-height:1.6; color:#4a4552; margin-bottom:28px; max-width:420px; }
-
-  /* ---------- social proof ---------- */
-  .social{ background:var(--pink); padding:100px 0; text-align:center; }
-  .social .section-head p{ color:#4a4552; }
-  .social-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:10px; }
-  .social-tile{
-    aspect-ratio:3/4; border-radius:var(--radius-md); border:1.5px dashed var(--charcoal);
-    background:rgba(255,249,238,.55);
-    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px;
-    font-family:var(--mono); font-size:12px; text-align:center; padding:16px;
-  }
-  .social-tile svg{ width:34px; height:34px; opacity:.7; }
-  .social-cta{ margin-top:40px; }
-
-  /* ---------- brand story ---------- */
-  .story{ background:var(--cream); padding:110px 0; }
-  .story .wrap{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:center; }
-  .story-art{ aspect-ratio:1/1.1; border-radius:var(--radius-lg); background:var(--mint); border:1.5px solid var(--charcoal); position:relative; overflow:hidden; }
-  .story-art svg{ position:absolute; inset:0; width:100%; height:100%; }
-  .story h2{ font-size:clamp(30px,4.2vw,48px); margin-bottom:20px; }
-  .story p{ font-size:17px; line-height:1.65; color:#4a4552; margin-bottom:16px; max-width:460px; }
-  .story p.emph{ font-family:var(--display); font-weight:700; color:var(--charcoal); font-size:20px; }
-
-  /* ---------- signup ---------- */
-  .signup{ background:var(--lavender); padding:100px 0; text-align:center; position:relative; overflow:hidden; }
-  .signup .wrap{ max-width:560px; position:relative; z-index:2; }
-  .signup h2{ font-size:clamp(30px,4.5vw,48px); margin-bottom:14px; }
-  .signup p{ font-size:16px; margin-bottom:30px; color:#3a3542; }
-  .signup-form{ display:flex; gap:10px; background:var(--cream); border:1.5px solid var(--charcoal); border-radius:999px; padding:6px; }
-  .signup-form input{
-    flex:1; border:none; background:none; padding:12px 16px; font-family:var(--body); font-size:15px; outline:none;
-  }
-  .signup-form button{
-    font-family:var(--display); font-weight:700; font-size:14.5px; background:var(--charcoal); color:var(--cream);
-    padding:12px 22px; border-radius:999px; white-space:nowrap; transition:transform .15s ease;
-  }
-  .signup-form button:hover{ transform:scale(1.04); }
-  .signup-note{ margin-top:16px; font-family:var(--mono); font-size:12px; opacity:.7; }
-  .signup-success{ display:none; font-family:var(--display); font-weight:700; margin-top:16px; color:var(--grape); }
-
-  /* ---------- footer ---------- */
-  footer.site{ background:var(--charcoal); color:var(--cream); padding:70px 0 30px; }
-  .footer-grid{ display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:30px; padding-bottom:50px; border-bottom:1px solid rgba(255,249,238,.15); margin-bottom:26px; }
-  .footer-brand .logo{ color:var(--cream); }
-  .footer-brand .logo span{ color:var(--pink); }
-  .footer-brand p{ margin-top:12px; font-family:var(--display); font-weight:600; color:var(--pink); }
-  .footer-col h4{ font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--peach); margin-bottom:14px; }
-  .footer-col a{ display:block; font-size:14.5px; padding:6px 0; opacity:.85; }
-  .footer-col a:hover{ opacity:1; color:var(--pink); }
-  .footer-bottom{ display:flex; justify-content:space-between; font-family:var(--mono); font-size:12px; opacity:.6; flex-wrap:wrap; gap:10px; }
-
-  /* ---------- responsive ---------- */
-  @media (max-width:960px){
-    .nav-links{ display:none; }
-    .hamburger{ display:flex; }
-    .hero .wrap{ grid-template-columns:1fr; }
-    .hero-art{ height:300px; order:-1; }
-    .cat-grid, .drop-grid{ grid-template-columns:1fr; }
-    .product-grid{ grid-template-columns:repeat(2,1fr); }
-    .pin-feature .wrap, .story .wrap{ grid-template-columns:1fr; }
-    .social-grid{ grid-template-columns:repeat(2,1fr); }
-    .footer-grid{ grid-template-columns:1fr 1fr; }
-    .footer-brand{ grid-column:1/-1; }
-  }
-  @media (max-width:560px){
-    .product-grid{ grid-template-columns:1fr 1fr; }
-    .signup-form{ flex-direction:column; border-radius:20px; }
-    .signup-form button{ border-radius:14px; }
-    .footer-grid{ grid-template-columns:1fr; }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ animation:none !important; transition:none !important; }
-    html{ scroll-behavior:auto; }
-  }
-
-  :focus-visible{ outline:3px solid var(--grape); outline-offset:2px; }
-</style>
+<link rel="shortcut icon" href="/images/Favicon.png" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>:root{--pink:#f7b6d2;--buttercream:#fff1b8;--lavender:#c9b8f4;--blue:#b9ddf5;--mint:#bfe8d0;--peach:#ffd0b5;--cream:#fff9ee;--charcoal:#292631;--grape:#7654d6;--display:"Baloo 2", system-ui, sans-serif;--body:"Plus Jakarta Sans", system-ui, sans-serif;--mono:"Space Mono", monospace;--radius-lg:28px;--radius-md:18px;--radius-sm:10px;--container:1180px}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--body);background:var(--cream);color:var(--charcoal);-webkit-font-smoothing:antialiased;overflow-x:hidden}img,svg{max-width:100%;display:block}a{color:inherit;text-decoration:none}button{cursor:pointer;color:inherit;background:0 0;border:none;font-family:inherit}ul{list-style:none}.wrap{max-width:var(--container);margin:0 auto;padding:0 28px}h1,h2,h3{font-family:var(--display);letter-spacing:-.01em;line-height:1.02}.eyebrow{font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;background:var(--cream);color:var(--charcoal);border:1.5px dashed var(--charcoal);border-radius:999px;align-items:center;gap:8px;padding:6px 14px;font-size:12.5px;display:inline-flex;transform:rotate(-2deg)}.btn{font-family:var(--display);border-radius:999px;align-items:center;gap:8px;padding:14px 26px;font-size:16px;font-weight:700;transition:transform .18s,box-shadow .18s;display:inline-flex}.btn-primary{background:var(--charcoal);color:var(--cream);box-shadow:4px 4px #29263140}.btn-primary:hover{transform:translate(-2px,-2px);box-shadow:6px 6px #2926314d}.btn-ghost{font-family:var(--display);border-bottom:2.5px solid var(--charcoal);padding-bottom:2px;font-size:16px;font-weight:700}.btn-ghost:hover{color:var(--grape);border-color:var(--grape)}.reveal{opacity:1;transform:none}.sticker{font-family:var(--mono);letter-spacing:.04em;text-transform:uppercase;background:var(--cream);border:1.5px solid var(--charcoal);box-shadow:3px 3px 0 var(--charcoal);border-radius:999px;align-items:center;gap:6px;padding:7px 14px 7px 10px;font-size:12px;font-weight:700;display:inline-flex;position:relative}.sticker:before{content:"✦";font-size:11px}.sticker.-grape{background:var(--grape);color:var(--cream);border-color:var(--charcoal)}.sticker.-pink{background:var(--pink)}.sticker.-mint{background:var(--mint)}.doodle{pointer-events:none;opacity:.9;position:absolute}.announce{background:var(--charcoal);color:var(--cream);white-space:nowrap;padding:9px 0;overflow:hidden}.announce-track{font-family:var(--mono);letter-spacing:.05em;gap:40px;font-size:12.5px;animation:22s linear infinite marquee;display:inline-flex}@keyframes marquee{0%{transform:translate(0)}to{transform:translate(-50%)}}header.site{z-index:50;background:var(--cream);border-bottom:1.5px solid var(--charcoal);position:sticky;top:0}nav.main{max-width:var(--container);justify-content:space-between;align-items:center;margin:0 auto;padding:16px 28px;display:flex}.logo{font-family:var(--display);letter-spacing:-.02em;font-size:22px;font-weight:800}.logo span{color:var(--grape)}.nav-links{font-family:var(--display);gap:30px;font-size:15px;font-weight:600;display:flex}.nav-links a{position:relative}.nav-links a:hover{color:var(--grape)}.nav-icons{align-items:center;gap:18px;display:flex}.nav-icons button{display:flex}.nav-icons svg{width:20px;height:20px}.hamburger{flex-direction:column;gap:5px;display:none}.hamburger span{background:var(--charcoal);border-radius:2px;width:22px;height:2.5px}.mobile-menu{background:var(--cream);border-top:1.5px solid var(--charcoal);flex-direction:column;gap:2px;padding:10px 28px 20px;display:none}.mobile-menu.open{display:flex}.mobile-menu a{font-family:var(--display);border-bottom:1px dashed #29263133;padding:10px 0;font-size:17px;font-weight:600}.hero{background:var(--pink);padding:70px 0 90px;position:relative;overflow:hidden}.hero .wrap{z-index:2;grid-template-columns:1.05fr .95fr;align-items:center;gap:40px;display:grid;position:relative}.hero-copy h1{color:var(--charcoal);margin:18px 0 20px;font-size:clamp(46px,6.5vw,84px)}.hero-copy h1 em{white-space:nowrap;font-style:normal;position:relative}.hero-copy h1 em svg{width:108%;height:22px;position:absolute;top:100%;left:-4%}.hero-copy p{max-width:420px;margin-bottom:30px;font-size:18px;line-height:1.5}.hero-ctas{flex-wrap:wrap;align-items:center;gap:26px;display:flex}.hero-art{height:420px;position:relative}.hero-art .doodle svg{width:100%;height:100%}.float{animation:5s ease-in-out infinite float}.float.-slow{animation-duration:7s}.float.-rev{animation-direction:reverse}@keyframes float{0%,to{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-14px) rotate(var(--r,0deg))}}.hero-bg-doodle{z-index:1;opacity:.5;position:absolute;inset:0}.intro{background:var(--cream);text-align:center;padding:100px 0}.intro .wrap{max-width:760px}.intro h2{margin-bottom:22px;font-size:clamp(30px,4.2vw,46px)}.intro p{color:#4a4552;margin-bottom:28px;font-size:18px;line-height:1.6}.categories{background:var(--cream);padding-bottom:110px}.cat-grid{grid-template-columns:1fr 1fr;gap:24px;display:grid}.cat-card{border-radius:var(--radius-lg);border:1.5px solid var(--charcoal);flex-direction:column;justify-content:flex-end;min-height:320px;padding:44px 36px;transition:transform .25s;display:flex;position:relative;overflow:hidden}.cat-card:hover{transform:translateY(-6px)rotate(-.4deg)}.cat-card.-totes{background:var(--blue)}.cat-card.-pins{background:var(--lavender)}.cat-card h3{margin-bottom:8px;font-size:38px}.cat-card p.tag{margin-bottom:18px;font-size:16px;font-weight:500}.cat-card .cat-doodle{opacity:.85;width:70px;position:absolute;top:22px;right:22px}.bestsellers{background:var(--cream);padding:100px 0}.section-head{text-align:center;max-width:640px;margin:0 auto 50px}.section-head h2{margin-bottom:10px;font-size:clamp(30px,4.2vw,46px)}.section-head p{color:#4a4552;font-size:16px;font-family:var(--mono)}.product-grid{grid-template-columns:repeat(4,1fr);gap:22px;display:grid}.product-card{background:var(--cream);border:1.5px solid var(--charcoal);border-radius:var(--radius-md);transition:transform .2s,box-shadow .2s;overflow:hidden}.product-card:hover{transform:translateY(-4px);box-shadow:5px 5px #2926312e}.product-thumb{aspect-ratio:1;justify-content:center;align-items:center;display:flex;position:relative}.product-thumb svg{width:62%;height:62%}.product-card:first-child .product-thumb{background:var(--peach)}.product-card:nth-child(2) .product-thumb{background:var(--mint)}.product-card:nth-child(3) .product-thumb{background:var(--blue)}.product-card:nth-child(4) .product-thumb{background:var(--buttercream)}.quick-add{background:var(--charcoal);color:var(--cream);text-align:center;font-family:var(--display);opacity:0;border-radius:999px;padding:10px;font-size:13.5px;font-weight:700;transition:all .2s;position:absolute;bottom:10px;left:10px;right:10px;transform:translateY(14px)}.product-card:hover .quick-add{opacity:1;transform:translateY(0)}.quick-add.added{background:var(--mint);color:var(--charcoal)}.product-info{padding:16px 16px 18px}.product-info .pname{font-family:var(--display);margin-bottom:4px;font-size:15.5px;font-weight:700}.product-info .prow{justify-content:space-between;align-items:center;display:flex}.product-info .price{font-weight:700;font-family:var(--mono);font-size:14px}.stars{color:var(--grape);letter-spacing:1px;font-size:12px}.meme{background:var(--buttercream);padding:110px 0;position:relative;overflow:hidden}.meme .wrap{z-index:2;text-align:center;position:relative}.meme h2{font-size:clamp(30px,6vw,64px);line-height:1.08}.meme h2 .quote-line{display:block}.meme h2 .highlight{color:var(--grape)}.meme-sub{font-family:var(--mono);letter-spacing:.03em;margin-top:26px;font-size:14px}.meme-doodle{opacity:.55;position:absolute}.drop{background:var(--lavender);padding:100px 0}.drop-head{flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:44px;display:flex}.drop-head h2{font-size:clamp(30px,4.2vw,48px)}.drop-head p{font-family:var(--mono);margin-top:8px;font-size:14px}.drop-grid{grid-template-columns:repeat(3,1fr);gap:22px;display:grid}.drop-card{background:var(--cream);border:1.5px solid var(--charcoal);border-radius:var(--radius-md);padding:22px;transition:transform .2s;position:relative}.drop-card:hover{transform:rotate(-1deg)translateY(-4px)}.drop-thumb{aspect-ratio:4/3;border-radius:var(--radius-sm);justify-content:center;align-items:center;margin-bottom:16px;display:flex}.drop-card:first-child .drop-thumb{background:var(--pink)}.drop-card:nth-child(2) .drop-thumb{background:var(--mint)}.drop-card:nth-child(3) .drop-thumb{background:var(--peach)}.drop-thumb svg{width:58%}.drop-card .sticker{position:absolute;top:-12px;left:16px}.drop-card .pname{font-family:var(--display);margin-bottom:4px;font-size:16px;font-weight:700}.drop-card .price{font-family:var(--mono);font-size:13.5px}.pin-feature{background:var(--cream);padding:110px 0}.pin-feature .wrap{grid-template-columns:1fr 1fr;align-items:center;gap:56px;display:grid}.pin-collage{aspect-ratio:4/3;border-radius:20px;min-width:0;overflow:hidden}.pin-collage img{object-fit:cover;width:100%;height:100%;display:block}.pin-feature h2{margin-bottom:18px;font-size:clamp(32px,4.5vw,50px)}.pin-feature p{color:#4a4552;max-width:420px;margin-bottom:28px;font-size:17px;line-height:1.6}.social{background:var(--pink);text-align:center;padding:100px 0}.social .section-head p{color:#4a4552}.social-grid{grid-template-columns:repeat(4,1fr);gap:18px;margin-top:10px;display:grid}.social-tile{aspect-ratio:3/4;border-radius:var(--radius-md);border:1.5px dashed var(--charcoal);font-family:var(--mono);text-align:center;background:#fff9ee8c;flex-direction:column;justify-content:center;align-items:center;gap:10px;padding:16px;font-size:12px;display:flex}.social-tile svg{opacity:.7;width:34px;height:34px}.social-cta{margin-top:40px}.story{background:var(--cream);padding:110px 0}.story .wrap{grid-template-columns:.9fr 1.1fr;align-items:center;gap:56px;display:grid}.story-art{aspect-ratio:4/3;border-radius:20px;min-width:0;overflow:hidden}.story-art img{object-fit:cover;width:100%;height:100%;display:block}.story h2{margin-bottom:20px;font-size:clamp(30px,4.2vw,48px)}.story p{color:#4a4552;max-width:460px;margin-bottom:16px;font-size:17px;line-height:1.65}.story p.emph{font-family:var(--display);color:var(--charcoal);font-size:20px;font-weight:700}.signup{background:var(--lavender);text-align:center;padding:100px 0;position:relative;overflow:hidden}.signup .wrap{z-index:2;max-width:560px;position:relative}.signup h2{margin-bottom:14px;font-size:clamp(30px,4.5vw,48px)}.signup p{color:#3a3542;margin-bottom:30px;font-size:16px}.signup-form{background:var(--cream);border:1.5px solid var(--charcoal);border-radius:999px;gap:10px;padding:6px;display:flex}.signup-form input{font-family:var(--body);background:0 0;border:none;outline:none;flex:1;padding:12px 16px;font-size:15px}.signup-form button{font-family:var(--display);background:var(--charcoal);color:var(--cream);white-space:nowrap;border-radius:999px;padding:12px 22px;font-size:14.5px;font-weight:700;transition:transform .15s}.signup-form button:hover{transform:scale(1.04)}.signup-note{font-family:var(--mono);opacity:.7;margin-top:16px;font-size:12px}.signup-success{font-family:var(--display);color:var(--grape);margin-top:16px;font-weight:700;display:none}footer.site{background:var(--charcoal);color:var(--cream);padding:70px 0 30px}.footer-grid{border-bottom:1px solid #fff9ee26;grid-template-columns:1.4fr repeat(4,1fr);gap:30px;margin-bottom:26px;padding-bottom:50px;display:grid}.footer-brand .logo{color:var(--cream)}.footer-brand .logo span{color:var(--pink)}.footer-brand p{font-family:var(--display);color:var(--pink);margin-top:12px;font-weight:600}.footer-col h4{font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--peach);margin-bottom:14px;font-size:12px}.footer-col a{opacity:.85;padding:6px 0;font-size:14.5px;display:block}.footer-col a:hover{opacity:1;color:var(--pink)}.footer-bottom{font-family:var(--mono);opacity:.6;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:12px;display:flex}@media (width<=960px){.nav-links{display:none}.hamburger{display:flex}.hero .wrap{grid-template-columns:1fr}.hero-art{order:-1;height:300px}.cat-grid,.drop-grid{grid-template-columns:1fr}.product-grid{grid-template-columns:repeat(2,1fr)}.pin-feature .wrap,.story .wrap{grid-template-columns:1fr}.social-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}}@media (width<=560px){.product-grid{grid-template-columns:1fr 1fr}.signup-form{border-radius:20px;flex-direction:column}.signup-form button{border-radius:14px}.footer-grid{grid-template-columns:1fr}.wrap{padding:0 16px}nav.main{padding:12px 16px}.mobile-menu{padding:10px 16px 18px}.hero{padding:48px 0 60px}.hero-copy h1{font-size:clamp(38px,12vw,58px)}.hero-copy h1 em{white-space:normal}.hero-art{height:clamp(210px,65vw,280px)}.intro,.bestsellers,.meme,.drop,.pin-feature,.social,.story,.signup{padding:64px 0}.categories{padding-bottom:64px}.section-head{margin-bottom:32px}.cat-card{min-height:260px;padding:30px 22px}.cat-card h3{font-size:32px}.product-grid{gap:12px}.product-info{padding:12px 10px 14px}.product-info .pname{font-size:14px}.product-info .prow{flex-direction:column;align-items:flex-start;gap:4px}.drop-grid{gap:16px}.drop-card{padding:18px 14px}footer.site{padding:54px 0 24px}}@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}:focus-visible{outline:3px solid var(--grape);outline-offset:2px}</style>
+  
+  
+  
 </head>
 <body>
-
-<div class="announce">
-  <div class="announce-track">
-    <span>✦ FREE SHIPPING ON ORDERS OVER R600 ✦ NEW PINS EVERY FRIDAY ✦ RETURNS ARE PAINLESS, WE PROMISE ✦</span>
-    <span>✦ FREE SHIPPING ON ORDERS OVER R600 ✦ NEW PINS EVERY FRIDAY ✦ RETURNS ARE PAINLESS, WE PROMISE ✦</span>
-  </div>
-</div>
 
 <header class="site">
   <nav class="main">
@@ -333,10 +23,9 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-icons">
-      <button aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
-      <button aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg></button>
-      <button aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.5-9.3-8.8C1.1 8 2.4 4.8 5.6 4.1 8 3.6 10 5 12 7c2-2 4-3.4 6.4-2.9 3.2.7 4.5 3.9 2.9 7.1C19 15.5 12 20 12 20z"/></svg></button>
-      <button aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg></button>
+      <button aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"></path></svg></button>
+      <button aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.5-9.3-8.8C1.1 8 2.4 4.8 5.6 4.1 8 3.6 10 5 12 7c2-2 4-3.4 6.4-2.9 3.2.7 4.5 3.9 2.9 7.1C19 15.5 12 20 12 20z"></path></svg></button>
+      <button aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"></path><path d="M8 7V5a4 4 0 0 1 8 0v2"></path></svg></button>
       <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
@@ -352,13 +41,13 @@
   <!-- HERO -->
   <section class="hero">
     <svg class="hero-bg-doodle" viewBox="0 0 1200 500" preserveAspectRatio="none">
-      <circle cx="80" cy="60" r="3" fill="#292631"/><circle cx="180" cy="420" r="3" fill="#292631"/>
-      <circle cx="1100" cy="80" r="3" fill="#292631"/><circle cx="60" cy="250" r="3" fill="#292631"/>
+      <circle cx="80" cy="60" r="3" fill="#292631"></circle><circle cx="180" cy="420" r="3" fill="#292631"></circle>
+      <circle cx="1100" cy="80" r="3" fill="#292631"></circle><circle cx="60" cy="250" r="3" fill="#292631"></circle>
     </svg>
     <div class="wrap">
       <div class="hero-copy reveal in-view">
         <span class="eyebrow">✦ certified whimsy</span>
-        <h1>GET YOUR<br><em>WHIMSY<svg viewBox="0 0 300 20" fill="none"><path d="M4 14C40 4 90 4 130 12C170 20 220 4 260 10C280 13 290 10 296 8" stroke="#292631" stroke-width="5" stroke-linecap="round"/></svg></em> BACK.</h1>
+        <h1>GET YOUR<br><em>WHIMSY<svg viewBox="0 0 300 20" fill="none"><path d="M4 14C40 4 90 4 130 12C170 20 220 4 260 10C280 13 290 10 296 8" stroke="#292631" stroke-width="5" stroke-linecap="round"></path></svg></em> BACK.</h1>
         <br><br>
         <p>Tiny things for your bag, your outfit, and your questionable sense of humour.</p>
         <div class="hero-ctas">
@@ -369,29 +58,29 @@
       <div class="hero-art">
         <div class="doodle" style="inset:0;">
           <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="210" cy="380" rx="150" ry="20" fill="#292631" opacity="0.08"/>
+            <ellipse cx="210" cy="380" rx="150" ry="20" fill="#292631" opacity="0.08"></ellipse>
             <!-- tote bag -->
-            <path d="M100 160 L320 160 L300 380 L120 380 Z" fill="#FFF1B8" stroke="#292631" stroke-width="4"/>
-            <path d="M150 160 C150 110 290 110 290 160" fill="none" stroke="#292631" stroke-width="6" stroke-linecap="round"/>
-            <path d="M120 220 L300 220" stroke="#292631" stroke-width="2" opacity="0.3"/>
+            <path d="M100 160 L320 160 L300 380 L120 380 Z" fill="#FFF1B8" stroke="#292631" stroke-width="4"></path>
+            <path d="M150 160 C150 110 290 110 290 160" fill="none" stroke="#292631" stroke-width="6" stroke-linecap="round"></path>
+            <path d="M120 220 L300 220" stroke="#292631" stroke-width="2" opacity="0.3"></path>
             <!-- meme face on tote -->
-            <circle cx="210" cy="280" r="46" fill="#C9B8F4" stroke="#292631" stroke-width="3"/>
-            <circle cx="194" cy="272" r="4" fill="#292631"/>
-            <circle cx="226" cy="272" r="4" fill="#292631"/>
-            <path d="M192 296 Q210 306 228 296" stroke="#292631" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <circle cx="210" cy="280" r="46" fill="#C9B8F4" stroke="#292631" stroke-width="3"></circle>
+            <circle cx="194" cy="272" r="4" fill="#292631"></circle>
+            <circle cx="226" cy="272" r="4" fill="#292631"></circle>
+            <path d="M192 296 Q210 306 228 296" stroke="#292631" stroke-width="3" fill="none" stroke-linecap="round"></path>
           </svg>
         </div>
         <div class="doodle float" style="top:8%; left:2%; width:76px; --r:-8deg;">
-          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#BFE8D0" stroke="#292631" stroke-width="3"/><path d="M50 30l6 14 15 2-11 10 3 15-13-8-13 8 3-15-11-10 15-2z" fill="#292631"/></svg>
+          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#BFE8D0" stroke="#292631" stroke-width="3"></circle><path d="M50 30l6 14 15 2-11 10 3 15-13-8-13 8 3-15-11-10 15-2z" fill="#292631"></path></svg>
         </div>
         <div class="doodle float -slow" style="top:2%; right:6%; width:66px; --r:6deg;">
           <div class="sticker -grape">NEW!</div>
         </div>
         <div class="doodle float -rev" style="bottom:10%; left:0%; width:70px; --r:-4deg;">
-          <svg viewBox="0 0 100 100"><path d="M50 84C22 66 8 46 12 30c3-13 20-18 30-6 4 5 6 8 8 8s4-3 8-8c10-12 27-7 30 6 4 16-10 36-38 54z" fill="#F7B6D2" stroke="#292631" stroke-width="3"/></svg>
+          <svg viewBox="0 0 100 100"><path d="M50 84C22 66 8 46 12 30c3-13 20-18 30-6 4 5 6 8 8 8s4-3 8-8c10-12 27-7 30 6 4 16-10 36-38 54z" fill="#F7B6D2" stroke="#292631" stroke-width="3"></path></svg>
         </div>
         <div class="doodle float" style="bottom:0%; right:0%; width:64px; --r:10deg;">
-          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#B9DDF5" stroke="#292631" stroke-width="3"/><path d="M35 45c4-8 26-8 30 0M38 62c8 6 16 6 24 0" stroke="#292631" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#B9DDF5" stroke="#292631" stroke-width="3"></circle><path d="M35 45c4-8 26-8 30 0M38 62c8 6 16 6 24 0" stroke="#292631" stroke-width="3" fill="none" stroke-linecap="round"></path></svg>
         </div>
       </div>
     </div>
@@ -414,60 +103,14 @@
         <h2>CURRENTLY OBSESSED WITH</h2>
         <p>THE ONES EVERYONE KEEPS PUTTING IN THEIR CART</p>
       </div>
-      <div class="product-grid">
-
-        <div class="product-card reveal">
-          <div class="product-thumb">
-            <svg viewBox="0 0 100 100"><path d="M20 34h60l-6 52H26z" fill="#FFF9EE" stroke="#292631" stroke-width="3"/><path d="M32 34c0-12 6-18 18-18s18 6 18 18" fill="none" stroke="#292631" stroke-width="4"/></svg>
-            <span class="quick-add" data-product="anxiety-tote">ADD TO CART →</span>
-          </div>
-          <div class="product-info">
-            <div class="pname">"It's Giving Anxiety" Tote</div>
-            <div class="prow"><span class="price">R450</span><span class="stars">★★★★★</span></div>
-          </div>
-        </div>
-
-        <div class="product-card reveal">
-          <div class="product-thumb">
-            <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="#FFF9EE" stroke="#292631" stroke-width="3"/><path d="M38 46c4-6 20-6 24 0M40 60c6 5 14 5 20 0" stroke="#292631" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
-            <span class="quick-add" data-product="feral-pin">ADD TO CART →</span>
-          </div>
-          <div class="product-info">
-            <div class="pname">"Certified Feral" Enamel Pin</div>
-            <div class="prow"><span class="price">R120</span><span class="stars">★★★★★</span></div>
-          </div>
-        </div>
-
-        <div class="product-card reveal">
-          <div class="product-thumb">
-            <svg viewBox="0 0 100 100"><path d="M20 34h60l-6 52H26z" fill="#FFF9EE" stroke="#292631" stroke-width="3"/><path d="M32 34c0-12 6-18 18-18s18 6 18 18" fill="none" stroke="#292631" stroke-width="4"/><path d="M38 55h24M38 65h16" stroke="#292631" stroke-width="2"/></svg>
-            <span class="quick-add" data-product="final-form-tote">ADD TO CART →</span>
-          </div>
-          <div class="product-info">
-            <div class="pname">"Not My Final Form" Tote</div>
-            <div class="prow"><span class="price">R480</span><span class="stars">★★★★★</span></div>
-          </div>
-        </div>
-
-        <div class="product-card reveal">
-          <div class="product-thumb">
-            <svg viewBox="0 0 100 100"><circle cx="38" cy="46" r="16" fill="#FFF9EE" stroke="#292631" stroke-width="3"/><circle cx="62" cy="60" r="16" fill="#FFF9EE" stroke="#292631" stroke-width="3"/></svg>
-            <span class="quick-add" data-product="delulu-pins">ADD TO CART →</span>
-          </div>
-          <div class="product-info">
-            <div class="pname">"Delulu Is The Solulu" Pin Set</div>
-            <div class="prow"><span class="price">R180</span><span class="stars">★★★★★</span></div>
-          </div>
-        </div>
-
-      </div>
+      <div class="product-grid"></div>
     </div>
   </section>
 
   <!-- MEME EDITORIAL -->
   <section class="meme">
-    <div class="doodle meme-doodle float" style="top:8%; left:6%; width:56px;"><svg viewBox="0 0 100 100"><path d="M50 10l6 14 15 2-11 10 3 15-13-8-13 8 3-15-11-10 15-2z" fill="#292631"/></svg></div>
-    <div class="doodle meme-doodle float -rev" style="bottom:10%; right:8%; width:60px;"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#292631" stroke-width="4" stroke-dasharray="8 8"/></svg></div>
+    <div class="doodle meme-doodle float" style="top:8%; left:6%; width:56px;"><svg viewBox="0 0 100 100"><path d="M50 10l6 14 15 2-11 10 3 15-13-8-13 8 3-15-11-10 15-2z" fill="#292631"></path></svg></div>
+    <div class="doodle meme-doodle float -rev" style="bottom:10%; right:8%; width:60px;"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#292631" stroke-width="4" stroke-dasharray="8 8"></circle></svg></div>
     <div class="wrap reveal">
       <h2>
         <span class="quote-line">FOR PEOPLE WHO SAY</span>
@@ -487,28 +130,9 @@
           <h2 style="margin-top:14px;">NEW LITTLE THINGS</h2>
           <p>Fresh from the internet.</p>
         </div>
-        <a href="#" class="btn btn-primary">SHOP THE NEW DROP →</a>
+        <a href="shop.html?collection=new" class="btn btn-primary">SHOP THE NEW DROP →</a>
       </div>
-      <div class="drop-grid">
-        <div class="drop-card reveal">
-          <span class="sticker -grape">NEW</span>
-          <div class="drop-thumb"><svg viewBox="0 0 100 100"><path d="M20 34h60l-6 52H26z" fill="#FFF9EE" stroke="#292631" stroke-width="3"/></svg></div>
-          <div class="pname">Gremlin Mode Tote</div>
-          <div class="price">R460</div>
-        </div>
-        <div class="drop-card reveal">
-          <span class="sticker -grape">NEW</span>
-          <div class="drop-thumb"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="#FFF9EE" stroke="#292631" stroke-width="3"/></svg></div>
-          <div class="pname">Feral Little Guy Pin</div>
-          <div class="price">R130</div>
-        </div>
-        <div class="drop-card reveal">
-          <span class="sticker -grape">NEW</span>
-          <div class="drop-thumb"><svg viewBox="0 0 100 100"><rect x="30" y="26" width="40" height="50" rx="8" fill="#FFF9EE" stroke="#292631" stroke-width="3"/><circle cx="50" cy="20" r="6" fill="none" stroke="#292631" stroke-width="3"/></svg></div>
-          <div class="pname">Chaos Goblin Keychain</div>
-          <div class="price">R95</div>
-        </div>
-      </div>
+      <div class="drop-grid"></div>
     </div>
   </section>
 
@@ -516,15 +140,7 @@
   <section class="pin-feature">
     <div class="wrap">
       <div class="pin-collage reveal">
-        <svg viewBox="0 0 400 400">
-          <rect x="0" y="0" width="400" height="400" rx="28" fill="#B9DDF5" stroke="#292631" stroke-width="3"/>
-          <path d="M60 320 L120 200 L200 260 L260 140 L340 300" fill="none" stroke="#292631" stroke-width="4" opacity="0.15"/>
-          <circle cx="140" cy="150" r="34" fill="#FFF1B8" stroke="#292631" stroke-width="3"/>
-          <circle cx="240" cy="120" r="26" fill="#F7B6D2" stroke="#292631" stroke-width="3"/>
-          <circle cx="290" cy="220" r="30" fill="#BFE8D0" stroke="#292631" stroke-width="3"/>
-          <circle cx="120" cy="260" r="22" fill="#C9B8F4" stroke="#292631" stroke-width="3"/>
-          <circle cx="220" cy="290" r="18" fill="#FFD0B5" stroke="#292631" stroke-width="3"/>
-        </svg>
+        <img src="/images/Pastel Overthinker Club Pin Collection.png" alt="Pastel enamel pins, including an Overthinker Club pin, on a cream pouch" width="1448" height="1086" loading="lazy" decoding="async">
       </div>
       <div class="reveal">
         <h2>PIN YOUR PERSONALITY.</h2>
@@ -542,10 +158,10 @@
         <p>the "caught in the wild" wall starts with you</p>
       </div>
       <div class="social-grid">
-        <div class="social-tile reveal"><svg viewBox="0 0 24 24" fill="none" stroke="#292631" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/></svg>your photo here</div>
-        <div class="social-tile reveal"><svg viewBox="0 0 24 24" fill="none" stroke="#292631" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>your fit here</div>
-        <div class="social-tile reveal"><svg viewBox="0 0 24 24" fill="none" stroke="#292631" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>your review here</div>
-        <div class="social-tile reveal"><svg viewBox="0 0 24 24" fill="none" stroke="#292631" stroke-width="2"><path d="M12 20s-7-4.5-9-8.8C1.1 8 2.4 4.8 5.6 4.1 8 3.6 10 5 12 7c2-2 4-3.4 6.4-2.9 3.2.7 4.5 3.9 2.9 7.1C19 15.5 12 20 12 20z"/></svg>your pin haul here</div>
+        <div class="social-tile reveal"><svg viewBox="0 0 24 24" fill="none" stroke="#292631" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"></rect><circle cx="12" cy="12" r="4"></circle></svg>your photo here</div>
+        <div class="social-tile reveal"><svg viewBox="0 0 24 24" fill="none" stroke="#292631" stroke-width="2"><path d="M12 2v20M2 12h20"></path></svg>your fit here</div>
+        <div class="social-tile reveal"><svg viewBox="0 0 24 24" fill="none" stroke="#292631" stroke-width="2"><circle cx="12" cy="12" r="9"></circle></svg>your review here</div>
+        <div class="social-tile reveal"><svg viewBox="0 0 24 24" fill="none" stroke="#292631" stroke-width="2"><path d="M12 20s-7-4.5-9-8.8C1.1 8 2.4 4.8 5.6 4.1 8 3.6 10 5 12 7c2-2 4-3.4 6.4-2.9 3.2.7 4.5 3.9 2.9 7.1C19 15.5 12 20 12 20z"></path></svg>your pin haul here</div>
       </div>
       <div class="social-cta reveal"><a href="#signup" class="btn btn-primary">JOIN THE WHIMSY TEAM →</a></div>
     </div>
@@ -555,12 +171,7 @@
   <section class="story" id="story">
     <div class="wrap">
       <div class="story-art reveal">
-        <svg viewBox="0 0 300 330"><rect width="300" height="330" fill="#BFE8D0"/>
-          <path d="M40 260c30-90 60-120 110-120s90 40 110 100" fill="none" stroke="#292631" stroke-width="4" opacity="0.2"/>
-          <circle cx="150" cy="140" r="50" fill="#FFF1B8" stroke="#292631" stroke-width="3"/>
-          <circle cx="132" cy="128" r="5" fill="#292631"/><circle cx="168" cy="128" r="5" fill="#292631"/>
-          <path d="M128 156q22 16 44 0" stroke="#292631" stroke-width="4" fill="none" stroke-linecap="round"/>
-        </svg>
+        <img alt="Cream A Little More Whimsy Please tote decorated with colourful enamel pins" width="1448" height="1086" loading="lazy" decoding="async" data-product-image="p17">
       </div>
       <div class="reveal">
         <h2>A LITTLE MORE WHIMSY, PLEASE.</h2>
@@ -588,10 +199,10 @@
       </div>
       <div class="footer-col">
         <h4>Help</h4>
-        <a href="#">FAQ</a>
-        <a href="#">Shipping</a>
-        <a href="#">Returns</a>
-        <a href="#">Contact</a>
+        <a href="policies.html">Store information</a>
+        <a href="policies.html#shipping">Shipping</a>
+        <a href="policies.html#returns">Returns</a>
+        <a href="contact.html">Contact</a>
       </div>
       <div class="footer-col">
         <h4>Brand</h4>
@@ -612,49 +223,9 @@
   </div>
 </footer>
 
-<script>
-  // mobile menu toggle
-  const hamburgerBtn = document.getElementById('hamburgerBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  hamburgerBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-  });
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
 
-  // scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  revealEls.forEach(el => io.observe(el));
 
-  // quick add interaction
-  document.querySelectorAll('.quick-add').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      btn.textContent = 'ADDED ✓';
-      btn.classList.add('added');
-      setTimeout(() => {
-        btn.textContent = 'ADD TO CART →';
-        btn.classList.remove('added');
-      }, 1400);
-    });
-  });
+  <noscript><style>#whimsy-page-loader{display:none!important}</style></noscript>
 
-  // signup form
-  const signupForm = document.getElementById('signupForm');
-  const signupSuccess = document.getElementById('signupSuccess');
-  signupForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    signupForm.style.display = 'none';
-    signupSuccess.style.display = 'block';
-  });
-</script>
 
-</body>
-</html>
+<script type="module" src="/src/common.js"></script><script type="module">const menu=document.getElementById('mobileMenu');document.getElementById('hamburgerBtn').addEventListener('click',()=>menu.classList.toggle('open'));menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));document.getElementById('signupForm')?.addEventListener('submit',event=>{event.preventDefault();window.whimsyNotice('Email updates are not available yet. Please check back soon.');});</script></body></html>

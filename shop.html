@@ -269,6 +269,28 @@
     .footer-grid{ grid-template-columns:1fr; }
     .dropdown-panel{ left:0; right:0; min-width:0; }
     .fb-right .dropdown-panel{ left:0; right:0; }
+    .wrap{ padding:0 16px; }
+    nav.main{ padding:12px 16px; }
+    .mobile-menu{ padding:10px 16px 18px; }
+    .shop-hero{ padding:42px 0 28px; }
+    .shop-hero h1{ font-size:clamp(38px,12vw,60px); }
+    .cat-tabs{ padding:12px 16px; }
+    .filter-bar .wrap{ gap:10px; }
+    .fb-left,.fb-right{ min-width:0; gap:8px; }
+    .fb-btn{ padding:9px 10px; font-size:11px; }
+    .product-grid{ gap:12px; }
+    .product-info{ padding:12px 10px 14px; }
+    .product-info .pname{ font-size:14px; }
+    .product-info .prow{ align-items:flex-start; flex-direction:column; gap:4px; }
+    .stars{ font-size:10px; }
+    .mid-banner,.mood-section,.bottom-cta{ padding:60px 0; }
+    .bottom-cta-ctas{ flex-direction:column; align-items:stretch; }
+    .bottom-cta-ctas .btn{ justify-content:center; }
+    footer.site{ padding:54px 0 24px; }
+  }
+
+  @media (hover:none){
+    .product-card .quick-add{ transform:translateY(0); opacity:1; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -279,14 +301,7 @@
   :focus-visible{ outline:3px solid var(--grape); outline-offset:2px; }
 </style>
 </head>
-<body>
-
-<div class="announce">
-  <div class="announce-track">
-    <span>✦ FREE SHIPPING ON ORDERS OVER R600 ✦ NEW PINS EVERY FRIDAY ✦ RETURNS ARE PAINLESS, WE PROMISE ✦</span>
-    <span>✦ FREE SHIPPING ON ORDERS OVER R600 ✦ NEW PINS EVERY FRIDAY ✦ RETURNS ARE PAINLESS, WE PROMISE ✦</span>
-  </div>
-</div>
+<body class="shop-page">
 
 <header class="site">
   <nav class="main">
@@ -297,7 +312,6 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-icons">
-      <button aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
       <button aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg></button>
       <button aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.5-9.3-8.8C1.1 8 2.4 4.8 5.6 4.1 8 3.6 10 5 12 7c2-2 4-3.4 6.4-2.9 3.2.7 4.5 3.9 2.9 7.1C19 15.5 12 20 12 20z"/></svg></button>
       <button aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg></button>
@@ -311,151 +325,8 @@
   </div>
 </header>
 
-<main>
+<main id="shop-app"></main>
 
-  <!-- SHOP HERO -->
-  <section class="shop-hero">
-    <svg class="shop-hero-doodle" style="top:16px; right:6%; width:54px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#292631" stroke-width="3" stroke-dasharray="6 7"/></svg>
-    <svg class="shop-hero-doodle" style="bottom:6px; left:2%; width:44px;" viewBox="0 0 100 100"><path d="M50 10l6 14 15 2-11 10 3 15-13-8-13 8 3-15-11-10 15-2z" fill="#F7B6D2" stroke="#292631" stroke-width="3"/></svg>
-    <div class="wrap">
-      <span class="eyebrow">✦ 24 little chaos objects</span>
-      <h1>SHOP THE CHAOS</h1>
-      <p>Meme-inspired things for your tote, your outfit, and your questionable life choices.</p>
-    </div>
-  </section>
-
-  <!-- CATEGORY TABS -->
-  <div class="cat-tabs-section">
-    <div class="cat-tabs" id="catTabs">
-      <button class="cat-tab active" data-cat="all">ALL</button>
-      <button class="cat-tab" data-cat="totes">TOTES</button>
-      <button class="cat-tab" data-cat="pins">PINS</button>
-      <button class="cat-tab" data-cat="new">NEW DROPS</button>
-      <button class="cat-tab" data-cat="bestseller">BESTSELLERS</button>
-    </div>
-  </div>
-
-  <!-- FILTER + SORT -->
-  <section class="filter-bar">
-    <div class="wrap">
-      <div class="fb-left">
-        <button class="fb-btn" id="filterBtn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
-          FILTER
-          <span class="fb-count" id="filterCount" style="display:none;">0</span>
-        </button>
-        <span class="result-count" id="resultCount">24 things</span>
-
-        <div class="dropdown-panel" id="filterPanel">
-          <div class="panel-group">
-            <h5>Category</h5>
-            <label class="panel-option"><input type="checkbox" value="totes" data-group="category"> Totes</label>
-            <label class="panel-option"><input type="checkbox" value="pins" data-group="category"> Pins</label>
-          </div>
-          <div class="panel-group">
-            <h5>Collection</h5>
-            <label class="panel-option"><input type="checkbox" value="new" data-group="collection"> New Drops</label>
-            <label class="panel-option"><input type="checkbox" value="bestseller" data-group="collection"> Bestsellers</label>
-          </div>
-          <div class="panel-group">
-            <h5>Price</h5>
-            <label class="panel-option"><input type="radio" name="price" value="all" data-group="price" checked> Any price</label>
-            <label class="panel-option"><input type="radio" name="price" value="under150" data-group="price"> Under R150</label>
-            <label class="panel-option"><input type="radio" name="price" value="150to400" data-group="price"> R150 – R400</label>
-            <label class="panel-option"><input type="radio" name="price" value="over400" data-group="price"> Over R400</label>
-          </div>
-          <div class="panel-group">
-            <h5>Availability</h5>
-            <label class="panel-option"><input type="checkbox" value="instock" data-group="availability"> In stock only</label>
-          </div>
-          <button class="panel-clear" id="clearFilters">CLEAR ALL FILTERS</button>
-        </div>
-      </div>
-
-      <div class="fb-right">
-        <button class="fb-btn" id="sortBtn">
-          SORT BY: <span id="sortLabel">Featured</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div class="dropdown-panel" id="sortPanel">
-          <button class="sort-option active" data-sort="featured">Featured</button>
-          <button class="sort-option" data-sort="newest">Newest</button>
-          <button class="sort-option" data-sort="bestselling">Best Selling</button>
-          <button class="sort-option" data-sort="lowhigh">Price: Low → High</button>
-          <button class="sort-option" data-sort="highlow">Price: High → Low</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCT GRID PART 1 -->
-  <section class="shop-grid-section">
-    <div class="wrap">
-      <div class="product-grid" id="grid1"></div>
-      <div class="empty-state" id="emptyState">
-        <svg class="edoodle" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#292631" stroke-width="3" stroke-dasharray="7 8"/><circle cx="38" cy="46" r="4" fill="#292631"/><circle cx="62" cy="46" r="4" fill="#292631"/><path d="M36 66q14-10 28 0" stroke="#292631" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
-        <h3>UH OH. NOTHING HERE.</h3>
-        <p>we searched. we panicked. we found absolutely nothing.</p>
-        <button class="btn btn-primary" id="clearFromEmpty">CLEAR FILTERS →</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- MID BANNER -->
-  <section class="mid-banner" id="midBanner">
-    <svg class="mid-doodle float" style="top:12%; left:6%; width:50px;" viewBox="0 0 100 100"><path d="M50 10l6 14 15 2-11 10 3 15-13-8-13 8 3-15-11-10 15-2z" fill="#292631"/></svg>
-    <svg class="mid-doodle float -rev" style="bottom:14%; right:8%; width:56px;" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#292631" stroke-width="4"/></svg>
-    <div class="wrap">
-      <h2>YOUR BAG LOOKS<br>BORING.</h2>
-      <p>we can fix that.</p>
-      <a href="#" class="btn btn-primary" data-filter-shortcut="pins">SHOP PINS →</a>
-    </div>
-  </section>
-
-  <!-- PRODUCT GRID PART 2 -->
-  <section class="shop-grid-section">
-    <div class="wrap">
-      <div class="product-grid" id="grid2"></div>
-    </div>
-  </section>
-
-  <!-- SHOP BY MOOD -->
-  <section class="mood-section">
-    <div class="wrap">
-      <div class="mood-head">
-        <h2>SHOP BY MOOD</h2>
-        <p>don't know which product you want? you know your mood.</p>
-      </div>
-      <div class="mood-grid" id="moodGrid">
-        <button class="mood-chip" data-mood="whimsical">WHIMSICAL</button>
-        <button class="mood-chip" data-mood="unhinged">UNHINGED</button>
-        <button class="mood-chip" data-mood="relatable">RELATABLE</button>
-        <button class="mood-chip" data-mood="cute">CUTE</button>
-        <button class="mood-chip" data-mood="chaotic">CHAOTIC</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCT GRID PART 3 -->
-  <section class="shop-grid-section">
-    <div class="wrap">
-      <div class="product-grid" id="grid3"></div>
-    </div>
-  </section>
-
-  <!-- BOTTOM CTA -->
-  <section class="bottom-cta">
-    <div class="wrap">
-      <h2>DID YOU FIND YOUR<br>NEW PERSONALITY?</h2>
-      <p>If not, there are more tiny pieces of chaos waiting.</p>
-      <div class="bottom-cta-ctas">
-        <a href="#" id="bestsellersCta" class="btn btn-primary">SHOP BESTSELLERS →</a>
-        <a href="index.html#signup" class="btn-ghost">JOIN THE EMAIL LIST →</a>
-      </div>
-    </div>
-  </section>
-
-</main>
 
 <footer class="site">
   <div class="wrap">
@@ -473,10 +344,10 @@
       </div>
       <div class="footer-col">
         <h4>Help</h4>
-        <a href="#">FAQ</a>
-        <a href="#">Shipping</a>
-        <a href="#">Returns</a>
-        <a href="#">Contact</a>
+        <a href="policies.html">Store information</a>
+        <a href="policies.html#shipping">Shipping</a>
+        <a href="policies.html#returns">Returns</a>
+        <a href="contact.html">Contact</a>
       </div>
       <div class="footer-col">
         <h4>Brand</h4>
@@ -492,334 +363,11 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 whimsy co. all rights reserved.</span>
-      <span>Made By <a href="http://hadiniholdings.co.za" style="text-decoration: none;color: #FFD0B5;">Hadini Holdings</a></span>
+      <span>Designed &amp; developed by <a href="https://HadiniHoldings.co.za">Hadini Holdings</a></span>
     </div>
   </div>
 </footer>
 
-<script>
-/* ========================= PRODUCT DATA ========================= */
-const ICONS = {
-  tote: `<path d="M20 34h60l-6 52H26z" fill="{{bg}}" stroke="#292631" stroke-width="3"/><path d="M32 34c0-12 6-18 18-18s18 6 18 18" fill="none" stroke="#292631" stroke-width="4"/>`,
-  toteFace: `<path d="M20 34h60l-6 52H26z" fill="{{bg}}" stroke="#292631" stroke-width="3"/><path d="M32 34c0-12 6-18 18-18s18 6 18 18" fill="none" stroke="#292631" stroke-width="4"/><circle cx="42" cy="58" r="4" fill="#292631"/><circle cx="58" cy="58" r="4" fill="#292631"/><path d="M40 70q10 8 20 0" stroke="#292631" stroke-width="3" fill="none" stroke-linecap="round"/>`,
-  toteLines: `<path d="M20 34h60l-6 52H26z" fill="{{bg}}" stroke="#292631" stroke-width="3"/><path d="M32 34c0-12 6-18 18-18s18 6 18 18" fill="none" stroke="#292631" stroke-width="4"/><path d="M38 55h24M38 65h16" stroke="#292631" stroke-width="2"/>`,
-  pinRound: `<circle cx="50" cy="50" r="30" fill="{{bg}}" stroke="#292631" stroke-width="3"/><path d="M38 46c4-6 20-6 24 0M40 60c6 5 14 5 20 0" stroke="#292631" stroke-width="3" fill="none" stroke-linecap="round"/>`,
-  pinStar: `<path d="M50 20l7 18 19 2-14 13 4 19-16-10-16 10 4-19-14-13 19-2z" fill="{{bg}}" stroke="#292631" stroke-width="3"/>`,
-  pinDouble: `<circle cx="38" cy="46" r="16" fill="{{bg}}" stroke="#292631" stroke-width="3"/><circle cx="62" cy="60" r="16" fill="{{bg}}" stroke="#292631" stroke-width="3"/>`,
-  pinHeart: `<path d="M50 78C28 62 16 46 19 32c2-11 17-15 25-5 3 4 5 6 6 6s3-2 6-6c8-10 23-6 25 5 3 14-9 30-31 46z" fill="{{bg}}" stroke="#292631" stroke-width="3"/>`,
-  keychain: `<rect x="30" y="26" width="40" height="50" rx="8" fill="{{bg}}" stroke="#292631" stroke-width="3"/><circle cx="50" cy="20" r="6" fill="none" stroke="#292631" stroke-width="3"/>`,
-  pinCat: `<circle cx="50" cy="54" r="26" fill="{{bg}}" stroke="#292631" stroke-width="3"/><path d="M30 36l8 10M70 36l-8 10" stroke="#292631" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="42" cy="52" r="3" fill="#292631"/><circle cx="58" cy="52" r="3" fill="#292631"/>`,
-};
-
-const BGS = ['#FFF9EE','#F7B6D2','#B9DDF5','#C9B8F4','#FFF1B8','#BFE8D0'];
-
-const PRODUCTS = [
-  { id:'p1',  name:'"It\'s Giving Anxiety" Tote',      price:450, category:'totes', collections:['bestseller'], mood:'relatable', badge:'popular',   icon:'toteFace',  rating:5, stock:true,  order:1 },
-  { id:'p2',  name:'"Certified Feral" Enamel Pin',       price:120, category:'pins',  collections:['bestseller'], mood:'unhinged',  badge:'popular',   icon:'pinRound',  rating:5, stock:true,  order:2 },
-  { id:'p3',  name:'"Not My Final Form" Tote',           price:480, category:'totes', collections:['bestseller'], mood:'chaotic',   badge:'last',      icon:'toteLines', rating:5, stock:true,  order:3 },
-  { id:'p4',  name:'"Delulu Is The Solulu" Pin Set',     price:180, category:'pins',  collections:['bestseller'], mood:'unhinged',  badge:'popular',   icon:'pinDouble', rating:5, stock:true,  order:4 },
-  { id:'p5',  name:'Gremlin Mode Tote',                  price:460, category:'totes', collections:['new'],       mood:'chaotic',   badge:'new',       icon:'tote',      rating:4, stock:true,  order:5 },
-  { id:'p6',  name:'Feral Little Guy Pin',                price:130, category:'pins',  collections:['new'],       mood:'unhinged',  badge:'new',       icon:'pinCat',    rating:4, stock:true,  order:6 },
-  { id:'p7',  name:'Chaos Goblin Keychain',                price:95,  category:'pins',  collections:['new'],       mood:'chaotic',   badge:'new',       icon:'keychain',  rating:4, stock:true,  order:7 },
-  { id:'p8',  name:'"Soft Launch My Sanity" Tote',        price:440, category:'totes', collections:[],            mood:'relatable', badge:'',          icon:'toteFace',  rating:4, stock:true,  order:8 },
-  { id:'p9',  name:'"Main Character Energy" Pin',          price:120, category:'pins',  collections:[],            mood:'whimsical', badge:'',          icon:'pinStar',   rating:5, stock:true,  order:9 },
-  { id:'p10', name:'"Emotional Support Chaos" Tote',       price:465, category:'totes', collections:[],            mood:'chaotic',   badge:'unhinged',  icon:'toteLines', rating:4, stock:true,  order:10 },
-  { id:'p11', name:'"Small But Unhinged" Pin',             price:110, category:'pins',  collections:[],            mood:'unhinged',  badge:'unhinged',  icon:'pinRound',  rating:5, stock:true,  order:11 },
-  { id:'p12', name:'"Soft Girl, Feral Heart" Tote',        price:455, category:'totes', collections:[],            mood:'cute',      badge:'back',      icon:'tote',      rating:4, stock:true,  order:12 },
-  { id:'p13', name:'"It\'s The Cortisol For Me" Pin',      price:120, category:'pins',  collections:[],            mood:'relatable', badge:'',          icon:'pinHeart',  rating:4, stock:false, order:13 },
-  { id:'p14', name:'Cottagecore Cryptid Tote',             price:470, category:'totes', collections:[],            mood:'whimsical', badge:'',          icon:'toteFace',  rating:5, stock:true,  order:14 },
-  { id:'p15', name:'"Just Vibing, Barely" Pin Set',        price:190, category:'pins',  collections:[],            mood:'relatable', badge:'',          icon:'pinDouble', rating:4, stock:true,  order:15 },
-  { id:'p16', name:'Feelings Are Fake Keychain',           price:95,  category:'pins',  collections:[],            mood:'unhinged',  badge:'',          icon:'keychain',  rating:3, stock:true,  order:16 },
-  { id:'p17', name:'"Certified Whimsy" Tote',              price:450, category:'totes', collections:['bestseller'],mood:'whimsical', badge:'popular',   icon:'tote',      rating:5, stock:true,  order:17 },
-  { id:'p18', name:'"Little Treat Enjoyer" Pin',           price:120, category:'pins',  collections:[],            mood:'cute',      badge:'',          icon:'pinStar',   rating:5, stock:true,  order:18 },
-  { id:'p19', name:'"I Peaked In The Group Chat" Tote',    price:465, category:'totes', collections:[],            mood:'relatable', badge:'',          icon:'toteLines', rating:4, stock:true,  order:19 },
-  { id:'p20', name:'Menace To Society Pin',                price:120, category:'pins',  collections:['new'],       mood:'chaotic',   badge:'new',       icon:'pinCat',    rating:4, stock:true,  order:20 },
-  { id:'p21', name:'"Everything Is Fine" Tote',            price:450, category:'totes', collections:[],            mood:'relatable', badge:'',          icon:'toteFace',  rating:3, stock:true,  order:21 },
-  { id:'p22', name:'"Soft Chaos Only" Pin Set',            price:180, category:'pins',  collections:[],            mood:'cute',      badge:'',          icon:'pinDouble', rating:4, stock:true,  order:22 },
-  { id:'p23', name:'Little Weird Guy Keychain',            price:95,  category:'pins',  collections:[],            mood:'whimsical', badge:'',          icon:'keychain',  rating:4, stock:false, order:23 },
-  { id:'p24', name:'"Manifesting Chaos" Tote',             price:475, category:'totes', collections:['new'],       mood:'chaotic',   badge:'new',       icon:'toteLines', rating:5, stock:true,  order:24 },
-];
-
-const BADGE_LABEL = {
-  new:'NEW', popular:"OH, THIS ONE'S POPULAR", limited:'LIMITED',
-  back:'BACK AGAIN', last:'LAST FEW', unhinged:'MILDLY UNHINGED',
-};
-
-/* ========================= STATE ========================= */
-let state = {
-  tab: 'all',       // all | totes | pins | new | bestseller
-  mood: null,
-  categoryChecks: [],
-  collectionChecks: [],
-  price: 'all',
-  inStockOnly: false,
-  sort: 'featured',
-};
-
-function iconSvg(product, bg){
-  const raw = ICONS[product.icon].replaceAll('{{bg}}', bg);
-  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${raw}</svg>`;
-}
-
-function passesFilters(p){
-  if(state.tab === 'totes' && p.category !== 'totes') return false;
-  if(state.tab === 'pins' && p.category !== 'pins') return false;
-  if(state.tab === 'new' && !p.collections.includes('new')) return false;
-  if(state.tab === 'bestseller' && !p.collections.includes('bestseller')) return false;
-
-  if(state.mood && p.mood !== state.mood) return false;
-
-  if(state.categoryChecks.length && !state.categoryChecks.includes(p.category)) return false;
-  if(state.collectionChecks.length && !state.collectionChecks.some(c => p.collections.includes(c))) return false;
-
-  if(state.price === 'under150' && p.price >= 150) return false;
-  if(state.price === '150to400' && (p.price < 150 || p.price > 400)) return false;
-  if(state.price === 'over400' && p.price <= 400) return false;
-
-  if(state.inStockOnly && !p.stock) return false;
-
-  return true;
-}
-
-function sortProducts(list){
-  const arr = [...list];
-  switch(state.sort){
-    case 'newest': return arr.sort((a,b)=> (b.collections.includes('new')?1:0) - (a.collections.includes('new')?1:0) || a.order-b.order);
-    case 'bestselling': return arr.sort((a,b)=> (b.collections.includes('bestseller')?1:0) - (a.collections.includes('bestseller')?1:0) || b.rating - a.rating);
-    case 'lowhigh': return arr.sort((a,b)=> a.price - b.price);
-    case 'highlow': return arr.sort((a,b)=> b.price - a.price);
-    default: return arr.sort((a,b)=> a.order - b.order);
-  }
-}
-
-function cardHTML(p, bgIndex){
-  const bg = BGS[bgIndex % BGS.length];
-  const bgAlt = BGS[(bgIndex + 2) % BGS.length];
-  const badgeHTML = p.badge ? `<span class="badge -${p.badge}">${BADGE_LABEL[p.badge]}</span>` : '';
-  const outOfStock = !p.stock;
-  return `
-    <div class="product-card reveal in-view" data-id="${p.id}">
-      <div class="product-thumb" style="background:${bg};">
-        ${badgeHTML}
-        <div class="thumb-main">${iconSvg(p, bg)}</div>
-        <div class="thumb-alt" style="background:${bgAlt};">${iconSvg(p, bgAlt)}</div>
-        <span class="quick-add" data-product="${p.id}">${outOfStock ? 'OUT OF STOCK' : 'QUICK ADD +'}</span>
-      </div>
-      <div class="product-info">
-        <div class="pname">${p.name}</div>
-        <div class="prow">
-          <span class="price">R${p.price}</span>
-          <span class="stars">${'★'.repeat(p.rating)}${'☆'.repeat(5-p.rating)}</span>
-        </div>
-      </div>
-    </div>`;
-}
-
-/* ========================= RENDER ========================= */
-function render(){
-  const filtered = sortProducts(PRODUCTS.filter(passesFilters));
-
-  const grid1 = document.getElementById('grid1');
-  const grid2 = document.getElementById('grid2');
-  const grid3 = document.getElementById('grid3');
-  const empty = document.getElementById('emptyState');
-  const midBanner = document.getElementById('midBanner');
-
-  document.getElementById('resultCount').textContent = filtered.length + (filtered.length === 1 ? ' thing' : ' things');
-
-  if(filtered.length === 0){
-    grid1.innerHTML = ''; grid2.innerHTML = ''; grid3.innerHTML = '';
-    empty.classList.add('show');
-    midBanner.style.display = 'none';
-    attachCardEvents();
-    return;
-  }
-  empty.classList.remove('show');
-
-  const part1 = filtered.slice(0, 8);
-  const part2 = filtered.slice(8, 16);
-  const part3 = filtered.slice(16);
-
-  grid1.innerHTML = part1.map((p,i)=>cardHTML(p,i)).join('');
-  grid2.innerHTML = part2.map((p,i)=>cardHTML(p,i)).join('');
-  grid3.innerHTML = part3.map((p,i)=>cardHTML(p,i)).join('');
-
-  midBanner.style.display = part2.length || part3.length || filtered.length > 8 ? 'block' : (filtered.length > 8 ? 'block' : 'none');
-  if (filtered.length <= 8) midBanner.style.display = 'none'; else midBanner.style.display = 'block';
-
-  attachCardEvents();
-}
-
-function attachCardEvents(){
-  document.querySelectorAll('.quick-add').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      if(btn.textContent.includes('OUT OF STOCK')) return;
-      btn.textContent = 'ADDED ✓';
-      btn.classList.add('added');
-      cartCount++;
-      document.getElementById('cartCount').textContent = cartCount;
-      setTimeout(() => {
-        btn.textContent = 'QUICK ADD +';
-        btn.classList.remove('added');
-      }, 1400);
-    });
-  });
-}
-
-let cartCount = 0;
-
-/* ========================= EVENTS: TABS ========================= */
-document.querySelectorAll('.cat-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    state.tab = tab.dataset.cat;
-    render();
-  });
-});
-
-/* ========================= EVENTS: FILTER PANEL ========================= */
-const filterBtn = document.getElementById('filterBtn');
-const filterPanel = document.getElementById('filterPanel');
-const sortBtn = document.getElementById('sortBtn');
-const sortPanel = document.getElementById('sortPanel');
-
-function closeAllPanels(except){
-  [filterPanel, sortPanel].forEach(p => { if(p !== except) p.classList.remove('open'); });
-}
-
-filterBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  filterPanel.classList.toggle('open');
-  closeAllPanels(filterPanel);
-});
-sortBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  sortPanel.classList.toggle('open');
-  closeAllPanels(sortPanel);
-});
-document.addEventListener('click', () => closeAllPanels(null));
-filterPanel.addEventListener('click', e => e.stopPropagation());
-sortPanel.addEventListener('click', e => e.stopPropagation());
-
-function updateFilterCount(){
-  const n = state.categoryChecks.length + state.collectionChecks.length + (state.price !== 'all' ? 1 : 0) + (state.inStockOnly ? 1 : 0);
-  const badge = document.getElementById('filterCount');
-  if(n > 0){ badge.style.display='flex'; badge.textContent = n; } else { badge.style.display='none'; }
-}
-
-filterPanel.querySelectorAll('input[type=checkbox][data-group="category"]').forEach(cb => {
-  cb.addEventListener('change', () => {
-    state.categoryChecks = [...filterPanel.querySelectorAll('input[data-group="category"]:checked')].map(i=>i.value);
-    updateFilterCount(); render();
-  });
-});
-filterPanel.querySelectorAll('input[type=checkbox][data-group="collection"]').forEach(cb => {
-  cb.addEventListener('change', () => {
-    state.collectionChecks = [...filterPanel.querySelectorAll('input[data-group="collection"]:checked')].map(i=>i.value);
-    updateFilterCount(); render();
-  });
-});
-filterPanel.querySelectorAll('input[data-group="price"]').forEach(rb => {
-  rb.addEventListener('change', () => {
-    state.price = filterPanel.querySelector('input[data-group="price"]:checked').value;
-    updateFilterCount(); render();
-  });
-});
-filterPanel.querySelectorAll('input[data-group="availability"]').forEach(cb => {
-  cb.addEventListener('change', () => {
-    state.inStockOnly = cb.checked;
-    updateFilterCount(); render();
-  });
-});
-
-function clearAllFilters(){
-  state.categoryChecks = []; state.collectionChecks = []; state.price = 'all'; state.inStockOnly = false;
-  state.tab = 'all'; state.mood = null;
-  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
-  document.querySelector('.cat-tab[data-cat="all"]').classList.add('active');
-  document.querySelectorAll('.mood-chip').forEach(c=>c.classList.remove('active'));
-  filterPanel.querySelectorAll('input[type=checkbox]').forEach(cb=>cb.checked=false);
-  filterPanel.querySelector('input[value="all"]').checked = true;
-  updateFilterCount(); render();
-}
-document.getElementById('clearFilters').addEventListener('click', clearAllFilters);
-document.getElementById('clearFromEmpty').addEventListener('click', clearAllFilters);
-
-/* ========================= EVENTS: SORT ========================= */
-document.querySelectorAll('.sort-option').forEach(opt => {
-  opt.addEventListener('click', () => {
-    document.querySelectorAll('.sort-option').forEach(o=>o.classList.remove('active'));
-    opt.classList.add('active');
-    state.sort = opt.dataset.sort;
-    document.getElementById('sortLabel').textContent = opt.textContent;
-    sortPanel.classList.remove('open');
-    render();
-  });
-});
-
-/* ========================= EVENTS: MOOD ========================= */
-document.querySelectorAll('.mood-chip').forEach(chip => {
-  chip.addEventListener('click', () => {
-    const isActive = chip.classList.contains('active');
-    document.querySelectorAll('.mood-chip').forEach(c=>c.classList.remove('active'));
-    if(isActive){
-      state.mood = null;
-    } else {
-      chip.classList.add('active');
-      state.mood = chip.dataset.mood;
-    }
-    render();
-    document.getElementById('grid1').scrollIntoView({behavior:'smooth', block:'start'});
-  });
-});
-
-/* ========================= SHORTCUT LINKS ========================= */
-document.querySelector('[data-filter-shortcut="pins"]').addEventListener('click', (e) => {
-  e.preventDefault();
-  document.querySelector('.cat-tab[data-cat="pins"]').click();
-  document.getElementById('catTabs').scrollIntoView({behavior:'smooth', block:'start'});
-});
-document.getElementById('bestsellersCta').addEventListener('click', (e) => {
-  e.preventDefault();
-  document.querySelector('.cat-tab[data-cat="bestseller"]').click();
-  document.getElementById('catTabs').scrollIntoView({behavior:'smooth', block:'start'});
-});
-
-/* ========================= INIT FROM URL PARAMS ========================= */
-(function initFromURL(){
-  const params = new URLSearchParams(window.location.search);
-  const cat = params.get('category');
-  const col = params.get('collection');
-  let targetTab = 'all';
-  if(cat === 'totes') targetTab = 'totes';
-  if(cat === 'pins') targetTab = 'pins';
-  if(col === 'new') targetTab = 'new';
-  if(col === 'bestseller') targetTab = 'bestseller';
-  state.tab = targetTab;
-  document.querySelectorAll('.cat-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === targetTab));
-})();
-
-/* ========================= MOBILE MENU ========================= */
-const hamburgerBtn = document.getElementById('hamburgerBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-hamburgerBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
-
-/* ========================= SCROLL REVEAL (static sections) ========================= */
-const revealEls = document.querySelectorAll('.shop-hero .wrap, .mid-banner .wrap, .mood-head, .bottom-cta .wrap');
-revealEls.forEach(el => el.classList.add('reveal'));
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) { entry.target.classList.add('in-view'); io.unobserve(entry.target); }
-  });
-}, { threshold: 0.12 });
-revealEls.forEach(el => io.observe(el));
-
-/* ========================= INITIAL RENDER ========================= */
-render();
-</script>
-
+<script type="module" src="/src/shop.js"></script>
 </body>
 </html>

@@ -1,0 +1,79 @@
+[
+  {
+    "id": "p1",
+    "name": "Anxiety Hearts Canvas Tote",
+    "file": "Anxiety Hearts Canvas Tote.png",
+    "previous_name": "\"It's Giving Anxiety\" Tote",
+    "previous_image_url": "",
+    "path": "p1/5701a871-e482-4a4e-9047-004bc19ebd11.png",
+    "sha256": "b7905b8e9a96dc8264f6b2949142e680c58644b08c8771628b0afe97ab2f0099",
+    "uploaded": true,
+    "image_url": "https://czlwrycmzqfvgvohezmx.supabase.co/storage/v1/object/public/product-images/p1/5701a871-e482-4a4e-9047-004bc19ebd11.png"
+  },
+  {
+    "id": "p2",
+    "name": "Certified Feral Cat Pin",
+    "file": "Certified Feral Cat Pin.png",
+    "previous_name": "\"Certified Feral\" Enamel Pin",
+    "previous_image_url": "",
+    "path": "p2/0c7bbd7d-cd65-492c-b31f-d2b33841a662.png",
+    "sha256": "5a04ba6a8fd1bb986f6e07755cdbf21800e6c660cb7e841617f92f6900d4b7fe",
+    "uploaded": true,
+    "image_url": "https://czlwrycmzqfvgvohezmx.supabase.co/storage/v1/object/public/product-images/p2/0c7bbd7d-cd65-492c-b31f-d2b33841a662.png"
+  },
+  {
+    "id": "p4",
+    "name": "Joyful Enamel Pin Duo",
+    "file": "Joyful Enamel Pin Duo.png",
+    "previous_name": "\"Delulu Is The Solulu\" Pin Set",
+    "previous_image_url": "",
+    "path": "p4/217db56c-caa0-4b2e-974c-49f0fc487c85.png",
+    "sha256": "60e65062bcd41f052da63899cf5823f0c759d9c9acfb633ca299cbb6549b3339",
+    "uploaded": true,
+    "image_url": "https://czlwrycmzqfvgvohezmx.supabase.co/storage/v1/object/public/product-images/p4/217db56c-caa0-4b2e-974c-49f0fc487c85.png"
+  },
+  {
+    "id": "p5",
+    "name": "Gremlin Mode Cat Tote Bag",
+    "file": "Gremlin Mode Cat Tote Bag.png",
+    "previous_name": "Gremlin Mode Tote",
+    "previous_image_url": "",
+    "path": "p5/f1679585-6e7f-47e4-8325-968f547bab5d.png",
+    "sha256": "19ef638d581a57666df784421d7cf27d4d2a27cb794ae019a4e5cd6750639e0e",
+    "uploaded": true,
+    "image_url": "https://czlwrycmzqfvgvohezmx.supabase.co/storage/v1/object/public/product-images/p5/f1679585-6e7f-47e4-8325-968f547bab5d.png"
+  },
+  {
+    "id": "p6",
+    "name": "Feral Little Guy Enamel Pin",
+    "file": "Feral Little Guy Enamel Pin.png",
+    "previous_name": "Feral Little Guy Pin",
+    "previous_image_url": "",
+    "path": "p6/514c261e-0b56-4c1d-b2ee-bff69496e4a8.png",
+    "sha256": "4d7c9151dc1b809713dd76eeeaada7b139ffcdc57def623a87647b97922ec881",
+    "uploaded": true,
+    "image_url": "https://czlwrycmzqfvgvohezmx.supabase.co/storage/v1/object/public/product-images/p6/514c261e-0b56-4c1d-b2ee-bff69496e4a8.png"
+  },
+  {
+    "id": "p7",
+    "name": "Chaos Goblin Trash Can Charm",
+    "file": "Chaos Goblin Trash Can Charm.png",
+    "previous_name": "Chaos Goblin Keychain",
+    "previous_image_url": "",
+    "path": "p7/f647f157-c343-4c17-9716-955c04ae2398.png",
+    "sha256": "f25c613de98c494b9de98ffaffb42c4727ce2992b8c7152d16550085e5a90756",
+    "uploaded": true,
+    "image_url": "https://czlwrycmzqfvgvohezmx.supabase.co/storage/v1/object/public/product-images/p7/f647f157-c343-4c17-9716-955c04ae2398.png"
+  },
+  {
+    "id": "p17",
+    "name": "A Little More Whimsy Please",
+    "file": "A Little More Whimsy Please.png",
+    "previous_name": "\"Certified Whimsy\" Tote",
+    "previous_image_url": "",
+    "path": "p17/b2fc5337-bdb7-439c-af82-218e4f0526df.png",
+    "sha256": "9821cf165bb6169c1d8e3d8209873cab5eda9e7dd1a2cb5dc26a453c6902d6aa",
+    "uploaded": true,
+    "image_url": "https://czlwrycmzqfvgvohezmx.supabase.co/storage/v1/object/public/product-images/p17/b2fc5337-bdb7-439c-af82-218e4f0526df.png"
+  }
+]

@@ -1,0 +1,38 @@
+body.account-page.customer-dashboard{padding:0;min-height:0;height:100vh;height:100dvh;overflow:hidden;isolation:auto}
+.customer-dashboard>.account-brand,.customer-dashboard>.account-backdrop{display:none}
+.account-page.customer-dashboard .account-main{width:100%;height:100%;max-width:none;min-height:0;padding:0;margin:0}
+.customer-dashboard .account-main>#app{height:100%}
+.customer-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+.customer-content .admin-overview{margin-bottom:26px}
+.customer-content #customer-section{max-width:1320px;margin-inline:auto}
+.customer-welcome-card{position:relative;display:flex;align-items:center;justify-content:space-between;gap:32px;overflow:hidden;padding:30px 32px;border:1px solid #e6dbf4;border-radius:15px;background:#f0e8fb;margin-bottom:22px}
+.customer-welcome-card>div:first-child{max-width:550px;position:relative;z-index:1}
+.customer-dashboard .customer-welcome-card h2{font:800 clamp(25px,3vw,34px)/1.15 var(--display);letter-spacing:-.4px;margin:10px 0}
+.customer-welcome-card p{font-size:12px;line-height:1.8;color:#766389;margin:0 0 20px;max-width:420px}
+.customer-welcome-art{width:150px;height:150px;flex-shrink:0;position:relative;display:grid;place-items:center;border-radius:50%;background:#e7daf6;color:#9669b6;transform:rotate(-9deg);margin:0 22px}
+.customer-welcome-art>svg:last-child{width:105px;height:115px}
+.customer-welcome-art>svg:first-child{position:absolute;width:30px;height:30px;top:0;right:-7px;color:#7951ba}
+.customer-overview-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:start}
+.customer-overview-grid .admin-panel{min-width:0}
+.customer-text-link{font-size:11px;font-weight:600;color:#7146ad!important;text-decoration:none;white-space:nowrap}
+.customer-text-link:hover{text-decoration:underline;text-underline-offset:3px}
+.customer-empty{padding:25px 10px 20px}
+.customer-dashboard .customer-empty h3{font-size:22px}
+.customer-empty p{font-size:11px;line-height:1.8}
+.customer-bag-line{display:flex;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid #f0eaf5}
+.customer-bag-line>div{min-width:0;flex:1}
+.customer-bag-line a{font-size:11px;text-decoration:none;font-weight:600}
+.customer-bag-line a:hover{text-decoration:underline}
+.customer-bag-line p{font-size:10px;color:#82738f;margin:4px 0}
+.customer-bag-line>strong{font-size:11px;white-space:nowrap}
+.customer-bag-total{display:flex;justify-content:space-between;gap:14px;font-size:12px;padding:18px 0}
+.customer-settings dl{max-width:600px;margin:0}
+.customer-settings dl>div{display:flex;justify-content:space-between;gap:24px;padding:18px 0;border-bottom:1px solid #eee8f4;font-size:13px}
+.customer-settings dt{color:#8b7c96}
+.customer-settings dd{margin:0;overflow-wrap:anywhere;text-align:right}
+.customer-account-note{font-size:12px;color:#887793;margin:24px 0;line-height:1.8}
+.customer-setting-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.account-auth .customer-back-button{display:block;margin:6px auto 0;font-size:11px;color:#6c4d8e}
+@media(max-width:1000px){.customer-overview-grid{grid-template-columns:1fr}.customer-welcome-art{width:100px;height:100px;margin:0}.customer-welcome-art>svg:last-child{width:80px;height:90px}.customer-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.customer-metrics .admin-metric{flex-direction:column;align-items:flex-start}}
+@media(max-width:760px){.customer-content .admin-overview{align-items:flex-start}.customer-welcome-card{padding:24px;gap:12px}.customer-welcome-art{position:absolute;right:-27px;top:-15px;width:105px;height:105px;opacity:.35}.customer-welcome-card>div:first-child{max-width:100%}.customer-welcome-card p{max-width:90%}.customer-metrics .admin-metric{padding:12px;gap:7px}.customer-metrics .admin-metric-icon{width:32px;height:32px}.customer-metrics .admin-metric>div>span{font-size:10px}.customer-metrics .admin-metric small{font-size:8px}.customer-metrics .admin-metric strong{font-size:22px}.customer-overview-grid{gap:16px}.customer-settings dl>div{flex-direction:column;gap:5px}.customer-settings dd{text-align:left}.customer-setting-actions{align-items:flex-start;flex-direction:column;gap:15px}}
+@media(max-width:380px){.customer-metrics{gap:7px}.customer-metrics .admin-metric{padding:10px 9px}.customer-metrics .admin-metric small{font-size:8px}.customer-welcome-card{padding:22px}.customer-dashboard .customer-welcome-card h2{font-size:28px}}
