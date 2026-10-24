@@ -1,4 +1,4 @@
-// Rendered into every public HTML page by Vite, before any browser JavaScript runs.
+// Rendered into every public storefront page by Vite, before browser JavaScript runs.
 const icon=path=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg>`;
 const account=icon('<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/>');
 const heart=icon('<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0l-1 1-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>');
@@ -17,5 +17,16 @@ export function applySiteLayout(html,filename){
   if(!['index','shop','about','contact','cart','product','checkout','policies'].includes(page))return html;
   let mainId=html.match(/<main\b[^>]*\bid="([^"]+)"/)?.[1];
   if(!mainId){mainId='main-content';html=html.replace(/<main\b/,'<main id="main-content"');}
-  return html.replace('<!-- WHIMSY_HEADER -->',siteHeader(page,mainId)).replace('<!-- WHIMSY_FOOTER -->',siteFooter());
+  html=html.replace(/<body\b([^>]*)>/i,(_match,attributes)=>{
+    const classAttribute=attributes.match(/\bclass=(["'])(.*?)\1/i);
+    if(!classAttribute)return `<body${attributes} class="storefront">`;
+    if(classAttribute[2].split(/\s+/).includes('storefront'))return `<body${attributes}>`;
+    return `<body${attributes.replace(classAttribute[0],`class=${classAttribute[1]}${classAttribute[2]} storefront${classAttribute[1]}`)}>`;
+  });
+  html=html.includes('<!-- WHIMSY_HEADER -->')
+    ? html.replace('<!-- WHIMSY_HEADER -->',siteHeader(page,mainId))
+    : html.replace(/<header\b[^>]*>[\s\S]*?<\/header>/i,siteHeader(page,mainId));
+  return html.includes('<!-- WHIMSY_FOOTER -->')
+    ? html.replace('<!-- WHIMSY_FOOTER -->',siteFooter())
+    : html.replace(/<footer\b[^>]*>[\s\S]*?<\/footer>/i,siteFooter());
 }

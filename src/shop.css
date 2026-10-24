@@ -38,3 +38,14 @@ body.shop-page{background:#fdfaf5;color:#1c1830}.shop-page .wrap{width:min(1120p
   .catalogue-hero .catalogue-categories{padding-block:10px 14px}
 }
 @media(max-width:360px){.shop-page .catalogue-hero h1{font-size:27px}.catalogue-hero-art{right:-14px}}
+@media(max-width:600px){
+  .catalogue-hero{min-height:0;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto;gap:0;padding-top:24px}
+  .catalogue-hero-copy{max-width:none;padding-bottom:0}
+  .shop-page .catalogue-hero h1{max-width:none}
+  .catalogue-hero p{max-width:34em}
+  .catalogue-hero-art{position:relative;grid-row:2;left:auto;right:auto;top:auto;bottom:auto;width:100%;height:clamp(145px,48vw,215px);min-height:0;margin:8px 0 4px}
+  .catalogue-hero-artwork{object-fit:contain;object-position:center}
+  .catalogue-hero .catalogue-categories{grid-row:3;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding-block:10px 14px}
+  .catalogue-hero .catalogue-categories::-webkit-scrollbar{display:none}
+  .shop-page .cat-tab{flex:0 0 auto}
+}

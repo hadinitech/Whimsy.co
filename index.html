@@ -12,29 +12,9 @@
   
   
 </head>
-<body>
+<body class="storefront">
 
-<header class="site">
-  <nav class="main">
-    <a href="#top" class="logo">whimsy<span>.</span>co</a>
-    <ul class="nav-links">
-      <li><a href="shop.html">Shop</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <div class="nav-icons">
-      <button aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"></path></svg></button>
-      <button aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.5-9.3-8.8C1.1 8 2.4 4.8 5.6 4.1 8 3.6 10 5 12 7c2-2 4-3.4 6.4-2.9 3.2.7 4.5 3.9 2.9 7.1C19 15.5 12 20 12 20z"></path></svg></button>
-      <button aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16l-1.5 11a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 7z"></path><path d="M8 7V5a4 4 0 0 1 8 0v2"></path></svg></button>
-      <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
-    </div>
-  </nav>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="shop.html">Shop</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </div>
-</header>
+<!-- WHIMSY_HEADER -->
 
 <main id="top">
 
@@ -183,49 +163,11 @@
 
 </main>
 
-<footer class="site">
-  <div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#top" class="logo">whimsy<span>.</span>co</a>
-        <p>get your whimsy back.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Shop</h4>
-        <a href="#categories">Totes</a>
-        <a href="#drop">Pins</a>
-        <a href="#drop">New Drops</a>
-        <a href="#bestsellers">Bestsellers</a>
-      </div>
-      <div class="footer-col">
-        <h4>Help</h4>
-        <a href="policies.html">Store information</a>
-        <a href="policies.html#shipping">Shipping</a>
-        <a href="policies.html#returns">Returns</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      <div class="footer-col">
-        <h4>Brand</h4>
-        <a href="#story">About</a>
-        <a href="#story">Our Story</a>
-      </div>
-      <div class="footer-col">
-        <h4>Follow</h4>
-        <a href="#">Instagram</a>
-        <a href="#">TikTok</a>
-        <a href="#">Pinterest</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 whimsy co. all rights reserved.</span>
-      <span>Made By <a href="http://hadiniholdings.co.za" style="text-decoration: none;color: #FFD0B5;">Hadini Holdings</a></span>
-    </div>
-  </div>
-</footer>
+<!-- WHIMSY_FOOTER -->
 
 
 
   <noscript><style>#whimsy-page-loader{display:none!important}</style></noscript>
 
 
-<script type="module" src="/src/common.js"></script><script type="module">const menu=document.getElementById('mobileMenu');document.getElementById('hamburgerBtn').addEventListener('click',()=>menu.classList.toggle('open'));menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));document.getElementById('signupForm')?.addEventListener('submit',event=>{event.preventDefault();window.whimsyNotice('Email updates are not available yet. Please check back soon.');});</script></body></html>
+<script type="module" src="/src/common.js"></script><script type="module">document.getElementById('signupForm')?.addEventListener('submit',event=>{event.preventDefault();window.whimsyNotice('Email updates are not available yet. Please check back soon.');});</script></body></html>

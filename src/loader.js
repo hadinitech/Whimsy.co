@@ -32,13 +32,13 @@ function hide() {
 }
 export function finishPageLoading(){tasks.delete(pageTask);hide();}
 export function beginPageLoading(){const token=Symbol('loading');tasks.add(token);show();let finished=false;return ()=>{if(finished)return;finished=true;tasks.delete(token);hide();};}
-export function startContextLoading(target,message='Loading the good stuff...') {
+export function startContextLoading(target,message='') {
   const prior=target.getAttribute('aria-busy');target.setAttribute('aria-busy','true');
   const wrapper=document.createElement('div');wrapper.innerHTML=loaderMarkup();const loader=wrapper.firstElementChild;
   // Keep gradient IDs unique when more than one contextual loader is visible.
   const id=`whimsy-gradient-${crypto.randomUUID()}`;
   loader.querySelector('linearGradient').id=id;loader.querySelector('.whimsy-loader-ring').style.stroke=`url(#${id})`;
-  loader.querySelector('.whimsy-loader-message').textContent=message;target.replaceChildren(loader);
+  const label=loader.querySelector('.whimsy-loader-message');label.textContent=message;label.hidden=!message;target.replaceChildren(loader);
   return ()=>{loader.remove();if(prior===null)target.removeAttribute('aria-busy');else target.setAttribute('aria-busy',prior);};
 }
 show();
